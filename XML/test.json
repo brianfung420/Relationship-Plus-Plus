@@ -1,0 +1,9 @@
+{
+	"Game1" : "接食物",
+	"Marks-flag" : true,
+	"Question-flag" : false,
+	"img-flag" : true,
+	"Marks-Question":"請問想多少分顯示隱藏内容？",
+	"Marks-Answer":"隱藏内容是多少分？",
+	"img-Question":"請上傳你想定制的圖片"
+}

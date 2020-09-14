@@ -1,0 +1,8 @@
+Node.js
+	設置3000端口為伺服器，並設置index.html為主頁
+package.json
+	設定相關資訊，並在scripts中的start設置執行 Node.js (設置内容)
+app.js
+	設置基本資訊(Name)
+liff-starter.js
+	裏面有userID，AccesID等等的官方教學
