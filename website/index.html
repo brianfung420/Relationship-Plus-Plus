@@ -3,15 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="./css/bootstrap-grid.min.css">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <title>RPlusPlus</title>
+    <link rel="stylesheet" href="./lib/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="./lib/css/bootstrap.min.css">
     <link rel="stylesheet" href="./css/index.css">
+    <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
+    <!--navbar-->
     <div class="container-fluid">
-        <a href="./customGame.html">toCustomeGame</a>
+        <div class="navbar">
+            <div class="logo"><div>Logo</div></div>
+            <div class="nav-links-list">
+                <a class="nav-link normal-text" href="./index.html">首頁</a>
+                <a class="nav-link normal-text" href="./customGame.html">遊戲商店</a>
+                <a class="nav-link normal-text" href="./index.html">我的遊戲</a>
+                <a class="nav-link normal-text" href="./index.html" id="loginBtn">登入</a>
+            </div>
+        </div>
+    </div>
+    <!--Marquee-->
+    <div class="container">
+        <div class="marquee">
+            <div class="marquee-content">
+                <div class="img-container marquee-content-item">
+                    <img src="https://fakeimg.pl/600x150/">
+                </div>
 
+                
+
+            </div>
+            <div class="marquee-index">
+                <div class="marquee-index-item-active"></div>
+                <div class="marquee-index-item"></div>
+                <div class="marquee-index-item"></div>
+            </div>
+        </div>
+    </div>
+
+    <!--About Us & About Product-->
+    <div class="container">
+        <div class="about-us">
+            <div class="title">介紹</div>
+            <div class="introduce-boxes row">
+                <div class="col">
+                    <div class="introduce-box-big">
+                        <div class="normal-text">我們提供固定模板和游戲</div>
+                    </div>
+                </div>
+                <div class="col">
+                    <div class="introduce-box-mid">
+                        <div class="normal-text">你需要選擇游戲以及部分對話内容</div>
+                    </div>
+                    <div class="introduce-box-mid">
+                        <div class="normal-text">我們會根據你的設計完成你的需求</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!--客製化介紹-->
+    <div class="container">
+        <div class="custom-introduce">
+            <div class="title">如何設計？</div>
+            <div class="img-container">
+                <img src="./assert/pic/custom_step.jpg" alt="">
+            </div>
+        </div>
+    </div>
+
+    <!--Go Custom Game Btn-->
+    <div class="container">
+        <a class="go-custom-game-btn" href="./customGame.html">
+            <div class="normal-text">開始設計</div>
+        </a>  
     </div>
     
     

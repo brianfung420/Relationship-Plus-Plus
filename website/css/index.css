@@ -1,0 +1,86 @@
+/*Marquee*/
+.marquee{
+    margin-top: 60px;
+    margin-bottom: 80px;
+}
+
+.marquee-content{
+    margin-bottom: 20px;
+    
+    position: relative;
+}
+.marquee-content-item{
+    
+}
+
+.marquee-index{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+.marquee-index-item{
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    background-color: rgb(194, 194, 194);
+    margin-right: 8px;
+}
+.marquee-index-item-active{
+    width: 16px;
+    height: 16px;
+    border-radius: 100%;
+    margin-right: 8px;
+    background-color: rgb(95, 95, 95);
+}
+
+/*about-us*/
+.about-us{
+    margin-bottom: 80px;
+}
+.about-us .introduce-box-big{
+    height: 420px;
+    border: 2px black solid;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: flex-end;
+}
+.about-us .introduce-box-mid{
+    height: 200px;
+    border: 2px black solid;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    padding: 20px;
+    display: flex;
+    align-items: flex-end;
+}
+
+/*客製化介紹*/
+.custom-introduce{
+    margin-bottom: 80px;
+}
+.custom-introduce .img-container{
+    border: 2px black solid;
+    border-radius: 5px;
+}
+
+/*Go Custom Game*/
+.go-custom-game-btn{
+    display: block;
+    height: 60px;
+    border: 2px black solid;
+    border-radius: 5px;
+    margin-bottom: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.go-custom-game-btn .normal-text{
+    font-size: 24px;
+    text-decoration: none;
+}
+
