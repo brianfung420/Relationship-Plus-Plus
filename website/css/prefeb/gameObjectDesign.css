@@ -1,0 +1,44 @@
+.game-object-design{
+    padding: 20px;
+    border: 2px black solid;
+    border-radius: 5px;
+    background-color:rgb(219, 218, 218);
+    display: flex;
+    flex-direction: column;
+    margin: 80px 0 80px;
+}
+
+.list-container{
+    padding: 20px;
+    border: 2px black solid;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+.game-object-list-item{
+    margin: 20px 0 20px;
+}
+.object-skin-preview{
+    width: 120px;
+    height: 120px;
+    border: 2px black solid;
+    border-radius: 5px;
+    background-color: #fff;
+    margin-bottom: 20px;
+}
+.game-object-design .btn{
+    margin-bottom: 20px;
+}
+.game-object-design input{
+    margin-bottom: 20px;
+}
+.game-object-design .point-input{
+    width: 50px;
+}
+
+.game-object-design .big-btn{
+    align-self: center;
+    margin-bottom: 20px;
+    
+}

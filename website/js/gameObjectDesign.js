@@ -1,0 +1,4 @@
+function addGameObject(){
+    alert("addGameObject!");
+}
+

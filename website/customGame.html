@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>customeGame</title>
+
+    <!----------------------CSS------------------------->
+    <link rel="stylesheet" href="lib/css/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/prefeb/dialogueDesign.css">
+    <link rel="stylesheet" href="css/prefeb/avatarDesign.css">
+    <link rel="stylesheet" href="css/prefeb/gameObjectDesign.css">
+    <link rel="stylesheet" href="css/prefeb/endFeedbackDesign.css">
+
+    <!----------------------JS------------------------->
+    <script src="js/main.js"></script>
+    <script src="js/customGame.js"></script>
+    <script src="js/dialougeDesign.js"></script>
+    <script src="js/avatarDesign.js"></script>
+    <script src="js/gameObjectDesign.js"></script>
+    <script src="js/endFeedbackDesign.js"></script>
+
+
+
+</head>
+<body>
+
+    <!--navBar-->
+
+    <!--dialogue design-->
+    <div class="container" >
+        <div class="dialouge-design" id="dialouge-design">
+            <div class="title">開場白</div>
+            <div class="video-manual">
+                <!--<iframe src="" frameborder="0"></iframe>-->
+            </div>
+            <div class="dialogue-list" id="dialouge-list">
+                <label class="dialouge-title subtitle">標題1</label>
+                <input class="dialouge-content" type="text">
+            </div>
+            <button class="btn" onclick="addDialougeInput()">新增段落</button>
+        </div>
+    </div>
+
+
+    <!--avatar design-->
+    <div class="container">
+        <div class="avatar-design" id="avatar-design">
+            <div class="title">人物貼皮</div>
+            <div class="video-manual">
+                <!--<iframe src="" frameborder="0"></iframe>-->
+            </div>
+            <div class="avatar-skin-list">
+                <div class="avatar-skin-item">
+                    <div class="avatar-skin-list-title subtitle">開心</div>
+                    <div class="avatar-skin-preview" id="avatar-skin-preview-1">
+                        <!--<iframe src="" frameborder="0"></iframe>-->
+                    </div>
+                    <button class="sub-btn" onclick="handleUploadPic('avatar-skin-preview-1')">上傳照片</button>
+                </div>
+                <div class="avatar-skin-item">
+                    <div class="avatar-skin-list-title subtitle">不開心</div>
+                    <div class="avatar-skin-preview" id="avatar-skin-preview-2">
+                        <!--<iframe src="" frameborder="0"></iframe>-->
+                    </div>
+                    <button class="sub-btn" onclick="handleUploadPic('avatar-skin-preview-2')">上傳照片</button>
+                </div>
+                <div class="avatar-skin-item">
+                    <div class="avatar-skin-list-title subtitle">其它</div>
+                    <div class="avatar-skin-preview" id="avatar-skin-preview-3">
+                        <!--<iframe src="" frameborder="0"></iframe>-->
+                    </div>
+                    <button class="sub-btn" onclick="handleUploadPic('avatar-skin-preview-3')">上傳照片</button>
+                </div>
+                <div class="avatar-skin-item">
+                    <div class="avatar-skin-list-title subtitle">其它</div>
+                    <div class="avatar-skin-preview" id="avatar-skin-preview-4">
+                        <!--<iframe src="" frameborder="0"></iframe>-->
+                    </div>
+                    <button class="sub-btn" onclick="handleUploadPic('avatar-skin-preview-4')">上傳照片</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!--game object design-->
+    <div class="container">
+        <div class="game-object-design" id="game-object-design">
+            <div class="title">食材部分</div>
+            <div class="video-manual">
+                <!--<iframe src="" frameborder="0"></iframe>-->
+            </div>
+            <div class="list-container">
+                <div class="game-object-list">
+                    <div class="game-object-list-item row">
+                        <div class="col-5 align-middle">
+                            <div class="object-skin-preview" id="object-skin-preview-1"></div>
+                            <button class="btn" onclick="handleUploadPic('object-skin-preview-1')">上傳照片</button>
+                        </div>
+                        <div class="col-7">
+                            <div class="subtitle">獲得的分數</div>
+                            <input class="point-input" type="text">
+                            <span class="subtitle">分</span>
+                            <div class="subtitle">反饋(ex:難吃、好吃。。。)</div>
+                            <input class="feedback-input" type="text">
+                        </div>
+                    </div>
+                </div>
+                <button class="big-btn" onclick="addGameObject()">新增食材</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!--end feedback-->
+    <div class="container">
+        <div class="end-feedback-design" id="end-feedback-design">
+            <div class="title">結束回饋</div>
+            <div class="video-manual">
+                <!--<iframe src="" frameborder="0"></iframe>-->
+            </div>
+            <div class="feedback-list">
+                <div class="feedback-list-item row">
+                    <div class="col-5">
+                        <span class="subtitle">大於</span>
+                        <input class="point" type="text">
+                        <span class="subtitle">分</span>
+                    </div>
+                    <div class="col-7">
+                        <input class="feedback-content" type="text">
+                    </div>
+                </div>
+                <div class="feedback-list-item row">
+                    <div class="col-5">
+                        <span class="subtitle">介於</span>
+                    </div>
+                    <div class="col-7">
+                        <input class="feedback-content" type="text">
+                    </div>
+                </div>
+                <div class="feedback-list-item row">
+                    <div class="col-5">
+                        <span class="subtitle">小於</span>
+                        <input class="point" type="text">
+                        <span class="subtitle">分</span>
+                    </div>
+                    <div class="col-7">
+                        <input class="feedback-content" type="text">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--preview game btn-->
+    <div class="conatiner">
+        <div class="preview-game-btn">
+            <button class="big-btn" onclick="handlePreviewGame()">體驗遊戲</button>
+        </div>
+        
+    </div>
+
+
+</body>
+</html>

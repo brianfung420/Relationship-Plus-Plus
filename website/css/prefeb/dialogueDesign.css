@@ -1,0 +1,23 @@
+.dialouge-design{
+    padding: 20px;
+    border: 2px black solid;
+    border-radius: 5px;
+    background-color:rgb(219, 218, 218);
+    display: flex;
+    flex-direction: column;
+    margin: 80px 0 80px;
+}
+
+.dialouge-list{
+    margin-bottom: 20px;
+
+}
+.dialouge-design input{
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.dialouge-design button{
+    width: 120px;
+    align-self: center;
+}
