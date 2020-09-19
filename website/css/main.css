@@ -59,6 +59,7 @@
     margin-bottom: 40px;
 }
 
+<<<<<<< Updated upstream
 /*nav-bar*/
 .navbar{
     position: fixed;
@@ -87,4 +88,8 @@
 .navbar .nav-link{
     margin-right: 20px;
     text-decoration: none;
+=======
+.sub-input{
+    display: none;
+>>>>>>> Stashed changes
 }

@@ -3,6 +3,8 @@ function addDialougeInput(){
     var dialougeAmount = document.getElementsByClassName("dialouge-title").length;
     var newInputLable = document.createElement("label");
     var newInput = document.createElement("input");
+    
+
 
     newInputLable.classList.add("dialouge-title");
     newInputLable.classList.add("subtitle");
@@ -13,5 +15,8 @@ function addDialougeInput(){
 
     dialougeList.appendChild(newInputLable);
     dialougeList.appendChild(newInput);
+
+    var list = document.getElementsByClassName("dialouge-content");
+    alert(list[1].value);
 
 }
