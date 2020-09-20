@@ -95,3 +95,7 @@
 .sub-input{
     display: none;
 }
+
+.isNull{
+    border: 2px solid red;
+}
