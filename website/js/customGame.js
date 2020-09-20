@@ -2,28 +2,17 @@ function handlePreviewGame(){
     //need to get all element from customHame.html page and feed to preview phraser games
 
     let flag=0;
-    let open_input = getInputArray("dialouge-content");
-    if(isNullInput(open_input)){
-    	flag=1;
-    }
    	//console.log(open_input);
 
-   	let img_input = getInputArray("sub-input");
-   	if(isNullInput(img_input)){
+   	let skin_img_input = getInputArray("skin-input");
+   	if(isNullInput(skin_img_input)){
     	flag=1;
     }
 
-    let marks_input = getInputArray("point-input");
-    if(isNullInput(marks_input)){
+    let food_img_input = getInputArray("food-input");
+   	if(isNullInput(food_img_input)){
     	flag=1;
     }
-
-    let feedback_input = getInputArray("feedback-input");
-    if(isNullInput(feedback_input)){
-    	flag=1;
-    }
-
-    
 
     if(!flag){
     	let json_obj = "";
@@ -37,7 +26,7 @@ function handlePreviewGame(){
 
 		console.log(json_obj);
     }else{
-    	alert("輸入全部資料");
+    	alert("請上傳指定資料");
     }
 
     
