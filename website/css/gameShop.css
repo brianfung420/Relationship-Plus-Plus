@@ -1,0 +1,46 @@
+.banner{
+    margin-bottom: 80px;
+}
+.banner .img-container{
+    width: 100vw;
+    max-width: 100%;
+    
+}
+.tab-links-list{
+    display: flex;
+
+}
+.tab-link{
+    width: 80px;
+    height: 40px;
+    border: 2px black solid;
+    border-radius: 10px 10px 0px 0px;
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+}
+.game-class-page-list{
+    border: 2px black solid;
+    border-radius: 0px 5px 5px 5px;
+    margin-bottom: 80px;
+    
+}
+.game-class-page{
+    min-height: 800px;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+
+}
+
+.fake-item{
+    
+}
+
+.fake-item .fake-img{
+    margin-bottom: 10px;
+}
+.fake-item .fake-text{
+    text-align: center;
+}
