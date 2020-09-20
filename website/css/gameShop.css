@@ -31,7 +31,11 @@
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+    display: none;
 
+}
+.game-class-page:nth-child(1){
+    display: flex;
 }
 
 .fake-item{

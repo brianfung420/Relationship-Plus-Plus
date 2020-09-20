@@ -17,6 +17,5 @@ function addDialougeInput(){
     dialougeList.appendChild(newInput);
 
     var list = document.getElementsByClassName("dialouge-content");
-    alert(list[1].value);
 
 }
