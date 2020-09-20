@@ -26,7 +26,7 @@
 
 </head>
 <body>
-
+<form action="">
     <!--navBar-->
     <div class="container-fluid">
         <div class="navbar">
@@ -48,7 +48,7 @@
             </div>
             <div class="dialogue-list" id="dialouge-list">
                 <label class="dialouge-title subtitle">標題1</label>
-                <input class="dialouge-content" type="text">
+                <input class="dialouge-content" type="text" required>
             </div>
             <button class="btn" onclick="addDialougeInput()">新增段落</button>
         </div>
@@ -65,7 +65,7 @@
             <div class="avatar-skin-list">
                 <div class="avatar-skin-item">
                     <div class="avatar-skin-list-title subtitle">開心</div>
-                    <div class="avatar-skin-preview" id="avatar-skin-preview-1">
+                    <div class="avatar-skin-preview">
                         <!--<iframe src="" frameborder="0"></iframe>-->
                     </div>
 
@@ -75,7 +75,7 @@
                 </div>
                 <div class="avatar-skin-item">
                     <div class="avatar-skin-list-title subtitle">不開心</div>
-                    <div class="avatar-skin-preview" id="avatar-skin-preview-2">
+                    <div class="avatar-skin-preview">
                         <!--<iframe src="" frameborder="0"></iframe>-->
                     </div>
                     <input type="file" class="sub-input" onchange="handleUploadPic('avatar-skin-preview-2',this.files)" multiple="false" accept="image/*">
@@ -83,7 +83,7 @@
                 </div>
                 <div class="avatar-skin-item">
                     <div class="avatar-skin-list-title subtitle">其它</div>
-                    <div class="avatar-skin-preview" id="avatar-skin-preview-3">
+                    <div class="avatar-skin-preview">
                         <!--<iframe src="" frameborder="0"></iframe>-->
                     </div>
                     <input type="file" class="sub-input" onchange="handleUploadPic('avatar-skin-preview-3',this.files)" multiple="false" accept="image/*">
@@ -91,7 +91,7 @@
                 </div>
                 <div class="avatar-skin-item">
                     <div class="avatar-skin-list-title subtitle">其它</div>
-                    <div class="avatar-skin-preview" id="avatar-skin-preview-4">
+                    <div class="avatar-skin-preview">
                         <!--<iframe src="" frameborder="0"></iframe>-->
                     </div>
                     <input type="file" class="sub-input" onchange="handleUploadPic('avatar-skin-preview-4',this.files)" multiple="false" accept="image/*">
@@ -112,18 +112,16 @@
                 <div class="game-object-list">
                     <div class="game-object-list-item row">
                         <div class="col-5 align-middle">
-                            <div class="object-skin-preview" id="object-skin-preview-1">
-                                
-                            </div>
+                            <div class="object-skin-preview"></div>
                             <input type="file" class="sub-input" onchange="handleUploadPic('object-skin-preview-1',this.files)" multiple="false" accept="image/*">
                             <button class="sub-btn">上傳照片</button>
                         </div>
                         <div class="col-7">
                             <div class="subtitle">獲得的分數</div>
-                            <input class="point-input" type="text">
+                            <input class="point-input" type="text" required>
                             <span class="subtitle">分</span>
                             <div class="subtitle">反饋(ex:難吃、好吃。。。)</div>
-                            <input class="feedback-input" type="text">
+                            <input class="feedback-input" type="text" required>
                         </div>
                     </div>
                 </div>
@@ -144,11 +142,11 @@
                 <div class="feedback-list-item row">
                     <div class="col-5">
                         <span class="subtitle">大於</span>
-                        <input class="point" type="text">
+                        <input class="point" type="text" required>
                         <span class="subtitle">分</span>
                     </div>
                     <div class="col-7">
-                        <input class="feedback-content" type="text">
+                        <input class="feedback-content" type="text" required>
                     </div>
                 </div>
                 <div class="feedback-list-item row">
@@ -156,17 +154,17 @@
                         <span class="subtitle">介於</span>
                     </div>
                     <div class="col-7">
-                        <input class="feedback-content" type="text">
+                        <input class="feedback-content" type="text" required>
                     </div>
                 </div>
                 <div class="feedback-list-item row">
                     <div class="col-5">
                         <span class="subtitle">小於</span>
-                        <input class="point" type="text">
+                        <input class="point" type="text" required>
                         <span class="subtitle">分</span>
                     </div>
                     <div class="col-7">
-                        <input class="feedback-content" type="text">
+                        <input class="feedback-content" type="text" required>
                     </div>
                 </div>
             </div>
@@ -176,11 +174,11 @@
     <!--preview game btn-->
     <div class="conatiner">
         <div class="preview-game-btn">
-            <button class="big-btn" onclick="handlePreviewGame()">體驗遊戲</button>
+            <input type="submit" class="big-btn" value="體驗遊戲" onclick="handlePreviewGame()"/>
         </div>
         
     </div>
 
-
+</form>
 </body>
 </html>
