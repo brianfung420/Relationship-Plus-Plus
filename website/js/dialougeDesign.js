@@ -3,8 +3,6 @@ function addDialougeInput(){
     var dialougeAmount = document.getElementsByClassName("dialouge-title").length;
     var newInputLable = document.createElement("label");
     var newInput = document.createElement("input");
-    
-
 
     newInputLable.classList.add("dialouge-title");
     newInputLable.classList.add("subtitle");

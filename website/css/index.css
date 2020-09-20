@@ -25,6 +25,7 @@
     border-radius: 100%;
     background-color: rgb(194, 194, 194);
     margin-right: 8px;
+    cursor: pointer;
 }
 .marquee-index-item-active{
     width: 16px;
@@ -32,6 +33,7 @@
     border-radius: 100%;
     margin-right: 8px;
     background-color: rgb(95, 95, 95);
+    cursor: pointer;
 }
 
 /*about-us*/
