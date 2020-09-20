@@ -9,6 +9,10 @@
      <link rel="stylesheet" href="lib/css/bootstrap.min.css">
      <link rel="stylesheet" href="css/main.css">
      <link rel="stylesheet" href="css/gameShop.css">
+
+     <!-----------------------JS-------------------------->
+     <script src="./js/gameShop.js"></script>
+     <script src="./js/main.js"></script>
 </head>
 <body>
     <!--navBar-->
@@ -44,26 +48,26 @@
             </div>
             <div class="game-class-page-list">
                 <div class="game-class-page" id="game-class-page-1">
-                    <div class="fake-item">
-                        <div class="img-container fake-img">
+                    <div class="fake-item" >
+                        <div class="img-container fake-img" onclick="showGameInfo('game1')">
                             <img src="https://fakeimg.pl/300x200/" alt="">
                         </div>
                         <div class="fake-text normal-text">XXX</div>
                     </div>
                     <div class="fake-item">
-                        <div class="img-container fake-img">
+                        <div class="img-container fake-img" onclick="showGameInfo('game1')">
                             <img src="https://fakeimg.pl/300x200/" alt="">
                         </div>
                         <div class="fake-text normal-text">XXX</div>
                     </div>
                     <div class="fake-item">
-                        <div class="img-container fake-img">
+                        <div class="img-container fake-img" onclick="showGameInfo('game1')">
                             <img src="https://fakeimg.pl/300x200/" alt="">
                         </div>
                         <div class="fake-text normal-text">XXX</div>
                     </div>
                     <div class="fake-item">
-                        <div class="img-container fake-img">
+                        <div class="img-container fake-img" onclick="showGameInfo('game1')">
                             <img src="https://fakeimg.pl/300x200/" alt="">
                         </div>
                         <div class="fake-text normal-text">XXX</div>
@@ -86,5 +90,13 @@
         </div>
     </div>
 
+    <!--showGameInfoWin-->
+    <div class="show-game-info-win" id="show-game-info-win">
+        <div class="close-btn" onclick="closeWin('show-game-info-win')">
+            <img src="./assert/pic/close.png" alt="">
+        </div>
+        <div class="video-manual"></div>
+        <a href="./customGame.html"><div class="big-btn">開始定制！</div></a>
+    </div>
 </body>
 </html>

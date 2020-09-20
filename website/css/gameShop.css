@@ -36,11 +36,43 @@
 
 .fake-item{
     
+    
 }
 
 .fake-item .fake-img{
     margin-bottom: 10px;
+    cursor: pointer;
 }
 .fake-item .fake-text{
     text-align: center;
+}
+
+.show-game-info-win{
+    
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    height: 600px;
+    width: 900px;
+    border: 2px solid black;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+.show-game-info-win .close-btn{
+    position: absolute;
+    right: 15px;
+    top: 15px;
+}
+.show-game-info-win .video-manual{
+    margin-bottom: 20px;
+}
+.show-game-info-win .big-btn{
+    text-align: center;
+    line-height: 2.5;
 }

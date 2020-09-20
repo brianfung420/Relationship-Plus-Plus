@@ -45,3 +45,8 @@ function setUploadButton(){
 	}
 }
 
+
+function closeWin(winName){
+  let win = document.getElementById(winName);
+  win.style.display = "none";
+}

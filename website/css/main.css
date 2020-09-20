@@ -58,6 +58,9 @@
     justify-content: center;
     margin-bottom: 40px;
 }
+.close-btn{
+    cursor: pointer;
+}
 
 /*nav-bar*/
 .navbar{
