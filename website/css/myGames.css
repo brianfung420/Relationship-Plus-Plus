@@ -1,0 +1,19 @@
+.my-games-list{
+    border: 2px black solid;
+    border-radius: 5px;
+    min-height: 800px;
+    padding: 40px;
+    display: flex;
+    margin-top: 100px;
+    margin-bottom: 80px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.fake-item .fake-img{
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.fake-item .fake-text{
+    text-align: center;
+}
