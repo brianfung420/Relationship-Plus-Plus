@@ -1,6 +1,4 @@
 window.onload = function(){
-	console.log("Welcome to design catch food");
-    setButton();
     setLIFF();
 }
 
@@ -15,7 +13,7 @@ function handleUploadPic(previewBox,input_file){
           continue;
         }
 
-        console.log(file);
+        //console.log(file);
     
         let img = document.createElement("img");
         img.classList.add("inner-img");
@@ -30,30 +28,6 @@ function handleUploadPic(previewBox,input_file){
     }
 }
 
-function setButton(){
-	let btn_list = document.getElementsByClassName("sub-btn");
-	let input_list = document.getElementsByClassName("sub-input");
-	//console.log("btn size:"+btn_list.length+" ,input size:"+input_list.length);
-
-	for(let i=0;i<btn_list.length;i++){
-		console.log(i);
-		btn_list[i].addEventListener("click",function(e){
-			if(input_list[i]){
-				input_list[i].click();
-			}
-			e.preventDefault();
-		},false);
-	}
-
-    document.getElementById("loginBtn").addEventListener('click',function(){
-        if(!liff.isLoggedIn()){
-            liff.login();
-        }
-    });
-
-}
-
-
 function closeWin(winName){
   let win = document.getElementById(winName);
   win.style.display = "none";
@@ -62,7 +36,8 @@ function closeWin(winName){
 
 function setLIFF(){
     const useNodeJS = true;   // if you are not using a node server, set this value to false
-    const defaultLiffId = "1654663712-jX3xwOow";   // change the default LIFF value if you are not using a node server
+    const defaultLiffId = "";   // change the default LIFF value if you are not using a node server
+                                //defaultLiffId = "1654663712-jX3xwOow"
 
     // DO NOT CHANGE THIS
     let myLiffId = "";
@@ -70,7 +45,7 @@ function setLIFF(){
     // if node is used, fetch the environment variable and pass it to the LIFF method
     // otherwise, pass defaultLiffId
     if (useNodeJS) {
-        fetch('/send-id')
+        fetch('./send-id')
             .then(function(reqResponse) {
                 return reqResponse.json();
             })
@@ -112,6 +87,34 @@ function initializeLiff(myLiffId) {
             initializeApp();
         })
         .catch((err) => {
-            document.getElementById("LineID").textConent = "Can't loading LIFF";
+            console.log("Can't loading LIFF");
+            console.log(err);
         });
+}
+
+function initializeApp(){
+    if(!liff.isInClient()){
+        document.getElementById("loginBtn").addEventListener('click',function(){
+            if(!liff.isLoggedIn()){
+                console.log("need to login");
+                liff.login({ redirectUri: "https://localhost:8080" });
+            }else{
+                getUserProfile();
+            }
+        });
+    }
+    else{
+        getUserProfile();
+    }
+    
+}
+
+function getUserProfile(){
+    liff.getProfile().then(function(profile){
+        const name = profile.displayName;
+        const id = profile.userId;
+        document.getElementById('loginBtn').textConent = name;
+    }).catch(function(err){
+        console.log("initApp:"+err);
+    });
 }
