@@ -6,7 +6,7 @@ const formidable = require('formidable');
 const path = require('path');
 const bodyParser = require('body-parser');
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
-const myLiffId = process.env.MY_LIFF_ID;
+const myLiffId = "1654663712-jX3xwOow";
 
 app.set('view engine','pub');
 app.set('views','./views');
@@ -20,7 +20,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // for parsing multipart/form-data
 
-app.use(express.static(path.join(__dirname, '/')));
+app.use(express.static(path.join(__dirname)));
+
+app.get('/send-id', function(req, res) {
+    res.json({id: myLiffId});
+    res.end();
+});
 
 app.get('/',function(req,res){
 	console.log("Get /");
@@ -74,7 +79,7 @@ app.get('/customGame',function(req,res){
 app.post('/customGameUpload',function(req,res){
 	console.log("customGame POST!");
 	let form = new formidable.IncomingForm();
-	form.uploadDir = __dirname + '\\tmp';
+	form.uploadDir = __dirname + '\\userData';
 	form.keepExtensions = true;//儲存副檔名
 	form.parse(req, function(error, fields, files) {
 		//fields為文字，而files則是圖片(目前來看)
@@ -86,10 +91,6 @@ app.post('/customGameUpload',function(req,res){
      	res.end();
   	});
 	
-});
-
-app.get('./send-id', function(req, res) {
-    res.json({id: myLiffId});
 });
 
 app.listen(port,function(){
