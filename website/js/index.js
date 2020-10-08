@@ -6,3 +6,7 @@ function marqueeSlider(){
     }
 }
 marqueeSlider();
+
+window.onload = function(){
+    setLIFF();
+}
