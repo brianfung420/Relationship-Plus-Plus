@@ -4,7 +4,7 @@
   "description": "Relation plus plus Server",
   "main": "express.js",
   "scripts": {
-  	"start": "express.js",
+    "start": "express.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Brian Fung",
@@ -12,6 +12,10 @@
   "dependencies": {
     "@line/liff": "^2.4.1",
     "express": "^4.17.1",
-    "formidable": "^1.2.2"
+    "express-session": "^1.17.1",
+    "formidable": "^1.2.2",
+    "mongoose": "^5.10.7",
+    "multer": "^1.4.2",
+    "passport": "^0.4.1"
   }
 }
