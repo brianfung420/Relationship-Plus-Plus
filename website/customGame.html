@@ -29,7 +29,7 @@
 
 </head>
 <body>
-<form action="/customGameUpload" method="POST" enctype="multipart/form-data" name="CatchFood">
+<form name="CatchFood">
     <!--navBar-->
     <div class="container-fluid">
         <div class="navbar">
@@ -75,7 +75,7 @@
                         <!--<iframe src="" frameborder="0"></iframe>-->
                     </div>
 
-                    <input type="file" class="sub-input skin-input" name="avatar-skin-happy" onchange="handleUploadPic('avatar-skin-preview-1',this.files)" multiple="false" accept="image/*" required>
+                    <input type="file" class="sub-input skin-input" name="avatar-skin-happy" onchange="handleUploadPic('avatar-skin-preview-1','avatar-skin-happy',this.files)" multiple="false" accept="image/*" required>
                     <button class="sub-btn">上傳照片</button>
                     
                 </div>
@@ -84,7 +84,7 @@
                     <div class="avatar-skin-preview" id="avatar-skin-preview-2">
                         <!--<iframe src="" frameborder="0"></iframe>-->
                     </div>
-                    <input type="file" class="sub-input skin-input" name="avatar-skin-unhappy" onchange="handleUploadPic('avatar-skin-preview-2',this.files)" multiple="false" accept="image/*" required>
+                    <input type="file" class="sub-input skin-input" name="avatar-skin-unhappy" onchange="handleUploadPic('avatar-skin-preview-2','avatar-skin-unhappy',this.files)" multiple="false" accept="image/*" required>
                     <button class="sub-btn">上傳照片</button>
                 </div>
                 <div class="avatar-skin-item">
@@ -92,7 +92,7 @@
                     <div class="avatar-skin-preview" id="avatar-skin-preview-3">
                         <!--<iframe src="" frameborder="0"></iframe>-->
                     </div>
-                    <input type="file" class="sub-input skin-input" name="avatar-skin-other-1" onchange="handleUploadPic('avatar-skin-preview-3',this.files)" multiple="false" accept="image/*" required>
+                    <input type="file" class="sub-input skin-input" name="avatar-skin-other-1" onchange="handleUploadPic('avatar-skin-preview-3','avatar-skin-other-1',this.files)" multiple="false" accept="image/*" required>
                     <button class="sub-btn">上傳照片</button>
                 </div>
                 <div class="avatar-skin-item">
@@ -100,7 +100,7 @@
                     <div class="avatar-skin-preview" id="avatar-skin-preview-4">
                         <!--<iframe src="" frameborder="0"></iframe>-->
                     </div>
-                    <input type="file" class="sub-input skin-input" name="avatar-skin-other-2" onchange="handleUploadPic('avatar-skin-preview-4',this.files)" multiple="false" accept="image/*" required>
+                    <input type="file" class="sub-input skin-input" name="avatar-skin-other-2" onchange="handleUploadPic('avatar-skin-preview-4','avatar-skin-other-2',this.files)" multiple="false" accept="image/*" required>
                     <button class="sub-btn">上傳照片</button>                
                 </div>
             </div>
@@ -119,7 +119,7 @@
                     <div class="game-object-list-item row">
                         <div class="col-5 align-middle">
                             <div class="object-skin-preview" id="object-skin-preview-1"></div>
-                            <input type="file" class="sub-input food-input" name="object-skin-1" onchange="handleUploadPic('object-skin-preview-1',this.files)" multiple="false" accept="image/*" required>
+                            <input type="file" class="sub-input food-input" name="object-skin-1" onchange="handleUploadPic('object-skin-preview-1','object-skin-1',this.files)" multiple="false" accept="image/*" required>
                             <button class="sub-btn">上傳照片</button>
                         </div>
                         <div class="col-7">
@@ -181,8 +181,9 @@
     <!--preview game btn-->
     <div class="conatiner">
         <div class="preview-game-btn">
-            <button type="button" class="big-btn" onclick="handlePreviewGame()">體驗游戲</button>
-            <input type="submit" class="big-btn" value="確認遊戲内容" /> <!--onclick="handlePreviewGame()"-->
+            <input type="submit" class="big-btn" onclick="handlePreviewGame()"></input>
+            <button type="button" class="big-btn" onclick="postDesign()">體驗游戲</button> 
+            <!--onclick="handlePreviewGame()"-->
         </div>
         
     </div>
