@@ -11,11 +11,15 @@
   "license": "ISC",
   "dependencies": {
     "@line/liff": "^2.4.1",
+    "axios": "^0.20.0",
+    "connect-multiparty": "^2.2.0",
     "express": "^4.17.1",
+    "express-formidable": "^1.2.0",
     "express-session": "^1.17.1",
     "formidable": "^1.2.2",
     "mongoose": "^5.10.7",
     "multer": "^1.4.2",
-    "passport": "^0.4.1"
+    "passport": "^0.4.1",
+    "pug": "^3.0.0"
   }
 }
