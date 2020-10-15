@@ -34,6 +34,7 @@ function initializeLiffOrDie(myLiffId) {
         console.log("Liff is die");
     } else {
         console.log("Liff is alive~");
+        sessionStorage.setItem('liffID',myLiffId);
         initializeLiff(myLiffId);
     }
 }
@@ -63,7 +64,7 @@ function initializeApp(){
         document.getElementById("loginBtn").addEventListener('click',function(){
             if(!liff.isLoggedIn()){
                 console.log("need to login");
-                liff.login({ redirectUri: "https://9e22947eda1e.ngrok.io/index.html" });    //回傳的網址
+                liff.login({ redirectUri: "https://4757e09f7a65.ngrok.io/index.html" });    //回傳的網址
             }else{
                 getUserProfile();
             }
@@ -83,7 +84,7 @@ function getUserProfile(){
         userLineId = id;
         console.log("name:"+name+" id:"+id);
         document.getElementById('loginBtn').textContent = name;
-        getLiffUserId("asasas");
+        getLiffUserId();
     }).catch(function(err){
         console.log("initApp:"+err);
     });
@@ -92,5 +93,6 @@ function getUserProfile(){
 function getLiffUserId(gameName){
     //setLIFF();
     console.log("getLiffUserId:"+userLineId);
+    sessionStorage.setItem('userID',userLineId);
     return userLineId+gameName;
 }
