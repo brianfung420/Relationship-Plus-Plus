@@ -29,7 +29,7 @@
 
 </head>
 <body>
-<form name="CatchFood">
+<form name="DesignForm" onsubmit="return false">
     <!--navBar-->
     <div class="container-fluid">
         <div class="navbar">
@@ -181,8 +181,8 @@
     <!--preview game btn-->
     <div class="conatiner">
         <div class="preview-game-btn">
-            <input type="submit" class="big-btn" onclick="handlePreviewGame()"></input>
-            <button type="button" class="big-btn" onclick="postDesign()">體驗游戲</button> 
+            <input type="submit" class="big-btn" onclick="handlePreviewGame()" value="體驗游戲"></input>
+            <input type="submit" class="big-btn" onclick="checkFormData()" value="確認游戲内容"></input> 
             <!--onclick="handlePreviewGame()"-->
         </div>
         
