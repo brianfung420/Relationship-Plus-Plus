@@ -2,6 +2,7 @@ function showGameInfo(game){
     let infoWin = document.getElementById("show-game-info-win");
     infoWin.style.display = "flex";
 }
+addLoadEvent(setLIFF);
 
 function switchTab(tabName){
     let gameClassPage = document.getElementsByClassName("game-class-page");
