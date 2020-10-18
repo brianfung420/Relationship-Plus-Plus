@@ -51,8 +51,8 @@ function closeWin(winName){
 function uploadImage(url,file){
     id = sessionStorage.getItem('userID');
     gameName = sessionStorage.getItem('gameName');
-    file.set('userId',id);
-    file.set('gameName',gameName);
+    file.set('LineId',id);
+    file.set('GameName',gameName);
         //console.log(file);
         // for (var key in text){
         //     formData.append(key, text[key]);
@@ -63,9 +63,10 @@ function uploadImage(url,file){
         //     let img_type=dataURI.split('/')[1];
         //     formData.append(key, img_Blob,key+'.'+img_type);
         // }
+
     fetch(url, {    //不用set header就可以上傳資料(content-type) 
             method: 'POST',
-            body: file,
+            body: file
     })
     .then(function(response){
         if(response.ok){
