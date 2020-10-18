@@ -203,7 +203,7 @@ app.post('/playGame',function(req,res){
 			mongodb.connect(function(err){
 				if(err) reject(new Error(err));
 																				 //這部分是指除了這些以外的需要(未實作)
-				mongodb.db.collection('GameList').findOne({"LineId":LineId+gameName}/*,{_id:0,'LineId':0}*/,function(err,result){
+				mongodb.db.collection('GameList').findOne({"LineId":LineId,"GameName":gameName}/*,{_id:0,'LineId':0}*/,function(err,result){
 					if(err) reject(new Error(err));
 					//console.log(result);
 					resolve(result);
