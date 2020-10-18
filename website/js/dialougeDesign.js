@@ -7,6 +7,7 @@ function addDialougeInput(){
     newInputLable.classList.add("dialouge-title");
     newInputLable.classList.add("subtitle");
     newInputLable.innerHTML +='標題' + (dialougeAmount+1);
+    newInput.name = "dialouge-content";
     newInput.required = true;
 
     newInput.classList.add("dialouge-content");
