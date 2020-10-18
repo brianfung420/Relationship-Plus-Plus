@@ -55,7 +55,7 @@
             </div>
             <div class="dialogue-list" id="dialouge-list">
                 <label class="dialouge-title subtitle">標題1</label>
-                <input class="dialouge-content" type="text" name="dialouge-content-1" required>
+                <input class="dialouge-content" type="text" name="dialouge-content" required>
             </div>
             <button class="btn" onclick="addDialougeInput()">新增段落</button>
         </div>
@@ -77,7 +77,7 @@
                         <!--<iframe src="" frameborder="0"></iframe>-->
                     </div>
 
-                    <input type="file" class="sub-input skin-input" name="avatar-skin-happy" onchange="handleUploadPic('avatar-skin-preview-1','avatar-skin-happy',this.files)" multiple="false" accept="image/*" required>
+                    <input type="file" class="sub-input skin-input" name="happy" onchange="handleUploadPic('avatar-skin-preview-1','happy',this.files)" multiple="false" accept="image/*" required>
                     <button class="sub-btn">上傳照片</button>
                     
                 </div>
@@ -87,7 +87,7 @@
                         <!--<iframe src="" frameborder="0"></iframe>-->
                        
                     </div>
-                    <input type="file" class="sub-input skin-input" name="avatar-skin-unhappy" onchange="handleUploadPic('avatar-skin-preview-2','avatar-skin-unhappy',this.files)" multiple="false" accept="image/*" required>
+                    <input type="file" class="sub-input skin-input" name="unhappy" onchange="handleUploadPic('avatar-skin-preview-2','unhappy',this.files)" multiple="false" accept="image/*" required>
                     <button class="sub-btn">上傳照片</button>
                 </div>
                 <div class="avatar-skin-item">
@@ -96,7 +96,7 @@
                         <!--<iframe src="" frameborder="0"></iframe>-->
                         
                     </div>
-                    <input type="file" class="sub-input skin-input" name="avatar-skin-other-1" onchange="handleUploadPic('avatar-skin-preview-3','avatar-skin-other-1',this.files)" multiple="false" accept="image/*" required>
+                    <input type="file" class="sub-input skin-input" name="other-1" onchange="handleUploadPic('avatar-skin-preview-3','other-1',this.files)" multiple="false" accept="image/*" required>
                     <button class="sub-btn">上傳照片</button>
                 </div>
                 <div class="avatar-skin-item">
@@ -105,7 +105,7 @@
                         <!--<iframe src="" frameborder="0"></iframe>-->
                         
                     </div>
-                    <input type="file" class="sub-input skin-input" name="avatar-skin-other-2" onchange="handleUploadPic('avatar-skin-preview-4','avatar-skin-other-2',this.files)" multiple="false" accept="image/*" required>
+                    <input type="file" class="sub-input skin-input" name="other-2" onchange="handleUploadPic('avatar-skin-preview-4','other-2',this.files)" multiple="false" accept="image/*" required>
                     <button class="sub-btn">上傳照片</button>                
                 </div>
             </div>
@@ -125,15 +125,15 @@
                     <div class="game-object-list-item row">
                         <div class="col-5 align-middle">
                             <div class="object-skin-preview" id="object-skin-preview-1"></div>
-                            <input type="file" class="sub-input food-input" name="object-skin-1" onchange="handleUploadPic('object-skin-preview-1','object-skin-1',this.files)" multiple="false" accept="image/*" required>
+                            <input type="file" class="sub-input food-input" name="object-skin" onchange="handleUploadPic('object-skin-preview-1','object-skin-1',this.files)" multiple="false" accept="image/*" required>
                             <button class="sub-btn">上傳照片</button>
                         </div>
                         <div class="col-7">
                             <div class="subtitle">獲得的分數</div>
-                            <input class="point-input" type="text" name="object-mark-1" required>
+                            <input class="point-input" type="text" name="object-mark" required>
                             <span class="subtitle">分</span>
                             <div class="subtitle">反饋(ex:難吃、好吃。。。)</div>
-                            <input class="feedback-input" type="text" name="object-feedback-1" required>
+                            <input class="feedback-input" type="text" name="object-feedback" required>
                         </div>
                     </div>
                 </div>
