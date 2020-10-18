@@ -3,11 +3,11 @@ function launchGame(gameName){
     let Uid=sessionStorage.getItem('userID');
 	axios({
 		method:'POST',
-		baseURL:'https://4757e09f7a65.ngrok.io',
+		baseURL:'https://56f8aae0b0b4.ngrok.io',
 		url:'/playGame',
 		'Content-Type':'application/json',
 		data:{
-			id : Uid,
+			LineId : Uid,
 			gamename : gameName
 		},
 		// `timeout` 指定请求超时的毫秒数(0 表示无超时时间)

@@ -5,6 +5,8 @@ const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
 
+var formHandle = require('./js/formHandle.js');
+
 //const formidable = require('express-formidable')
 //app.use(formidable()); 
 
@@ -110,38 +112,58 @@ app.get('/customGame',function(req,res){
 //客制化完成内容
 app.post('/customGameUpload',img_multer.any(),function(req,res,next){
 	console.log("customGame POST!");
-
 	let formData = req.body;
 	console.log('form data',formData);
 	console.log('file data',req.files);
 
- 	let json_text = {'LineId':""};
- 	let dbId = '';
+	let LineId = formData['LineId'],GameName = formData['GameName'];
 
- 	for (const [key, value] of Object.entries(formData)) {
- 		if(key=='userId'){
- 			dbId+= value;
- 		}else if(key=='gameName'){
- 			dbId+= value;
- 		}else{
- 			json_text[key]=value;
- 		}
-	}
-	json_text['LineId'] = dbId;
-
+	let json_text = formHandle.getJson(formData);
+	console.log("Json_text:",JSON.stringify(json_text));
+	json_text['avatarSkin'] = {};
 	//更改檔案路徑
 	for(var i=0;i<req.files.length;i++){
-		json_text[req.files[i].fieldname] = '..\\website\\'+req.files[i].path;
+		switch(req.files[i].fieldname){
+			case 'happy':
+				json_text['avatarSkin'][req.files[i].fieldname] = req.files[i].filename;
+				break;
+			case 'unhappy':
+				json_text['avatarSkin'][req.files[i].fieldname] = req.files[i].filename;
+				break;
+			case 'other-1':
+				json_text['avatarSkin'][req.files[i].fieldname] = req.files[i].filename;
+				break;
+			case 'other-2':
+				json_text['avatarSkin'][req.files[i].fieldname] = req.files[i].filename;
+				break;
+			case 'object-skin':
+				let tmp = json_text['arrestedObject'];
+				if(Array.isArray(tmp)){
+					for(var i=0;i<tmp.length;i++){
+						if(json_text['arrestedObject'][pic]==''){
+							json_text['arrestedObject'][pic] = req.files[i].filename;
+							break;
+						}
+					}
+				}else{
+					json_text['arrestedObject']['pic'] = req.files[i].filename;
+				}
+				break;
+			default:
+				console.log("can't handle:"+req.files[i].fieldname);
+		}
 	}
 
+	console.log("Json_text:",JSON.stringify(json_text));
+
 	//使用非同步存進Database
-	function saveToDB(dbId,callback){
+	function saveToDB(LineId,GameName,callback){
 		return new Promise(function (resolve,reject){
 			mongodb.connect(function (err){
 				if(err) reject(new Error(err)) ;
 				// let query = mongodb.db.collection('GameList').find({'id':dbId}).toArray();
 				// console.log(query.length);
-				mongodb.db.collection('GameList').findOneAndReplace({"LineId":{$eq:dbId}},json_text,{upsert:true},function(err,res){
+				mongodb.db.collection('GameList').findOneAndReplace({"LineId":{$eq:LineId},"GameName":{$eq:GameName}},json_text,{upsert:true},function(err,res){
 					if(err) reject(new Error(err));
 					console.log("1 document Replace,Data is:");
 					for (const [key, value] of Object.entries(res)) {
@@ -153,13 +175,14 @@ app.post('/customGameUpload',img_multer.any(),function(req,res,next){
 		});
 	}
 	
-	saveToDB(dbId).then(function(resp){
+	saveToDB(LineId,GameName).then(function(resp){
 		console.log(resp);
 		next();
 	})
 	.catch(function (res){
 		console.log(res);
 		res.sendStatus(500);
+		res.write(res);
 	});
 
 });
@@ -174,13 +197,13 @@ app.post('/playGame',function(req,res){
 	// 網頁方面的請求
 	console.log("POST from playGame");
 	let data = req.body;
-	let id = data.id,gameName=data.gamename;
+	let id = data.LineId,gameName=data.gamename;
 	function checkFilePath(){
 		return new Promise(function(resolve,reject){
 			mongodb.connect(function(err){
 				if(err) reject(new Error(err));
 																				 //這部分是指除了這些以外的需要(未實作)
-				mongodb.db.collection('GameList').findOne({"LineId":id+gameName}/*,{_id:0,'LineId':0}*/,function(err,result){
+				mongodb.db.collection('GameList').findOne({"LineId":LineId+gameName}/*,{_id:0,'LineId':0}*/,function(err,result){
 					if(err) reject(new Error(err));
 					//console.log(result);
 					resolve(result);
@@ -220,12 +243,7 @@ app.post('/playGame',function(req,res){
    //          		console.log(output);
 			// 	}
 			// });
-			console.log("File exist");	//這個會在最後才run到，在不適合的時候出現了(太晚了)
-			//關閉檔案
-			fs.close(fd,function(err){
-				if(err) throw Error("can not close file!");
-			});
-			
+			console.log("File exist(Function Inner)");	//這個會在最後才run到，在不適合的時候出現了(太晚了)		
 			return "File exist";
 		});
 	})
