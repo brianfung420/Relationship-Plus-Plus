@@ -34,28 +34,10 @@ function handlePreviewGame(){
     let ending_feedback_input = getInputArray("feedback-content");
 
     if(!flag){
-  //   	console.log("coming");
-  //   	let json_obj = '{"id" : '+id+",";
-  //   	json_obj+=createObject("opening","dialogue",open_input);
 
-  //   	//json_obj+=createObject("avatar","skin",skin_img_input);
-
-  //   	json_obj+=insertObject(food_img_input,obj_point_input,obj_feedback_input);
-  //       json_obj+=createEndingFeedback(ending_point_input,ending_feedback_input);
-
- 	// 	//Final to add
-  //   	json_obj += "}";
-
-  //   	console.log("json_obj:"+json_obj);
-
-		// let json_file = JSON.parse(json_obj);
-		
-		// console.log(json_file);
     }else{
     	alert("請上傳指定資料");
     }
-   	//console.log(img_input);
-    //
 }
 
 function getInputArray(id){
@@ -108,6 +90,7 @@ function checkFormData(){
         if(value===''){
             flag = 1;
         }
+        console.log(key+":"+value)
     }
 
     let skin_img_input = getInputArray("skin-input");
@@ -129,64 +112,9 @@ function checkFormData(){
         postDesign(formData);
     }
 
-
-    // let inputElement = document.getElementsByTagName('input');
-    // let imgElement = document.getElementsByTagName('img');
-    // let userID = sessionStorage.getItem('userID');
-    // let json_text = {};
-    // let json_file = {};
-    
-    // for(var i=0;i<inputElement.length;i++){
-    //     if(inputElement[i].value!='' && inputElement[i].type!='file'){
-    //         json_text[inputElement[i].name] = inputElement[i].value;
-    //     }
-    // }
-    // for(var i=0;i<imgElement.length;i++){
-    //     //console.log('Name:'+imgElement[i].name+",src:"+imgElement[i].src)
-    //     if(imgElement[i].src!=''){
-    //         json_file[imgElement[i].name] = imgElement[i].src;
-    //     }
-    // }
-
-    // uploadImage("/customGameUpload",json_text,json_file);
-
-    //console.log('text:'+JSON.stringify(json_text));
-    //console.log('file:'+JSON.stringify(json_file));
 }
 
-// function createObject(name,tagName,data){
-// 	let text = '"' + name + '":[';
-// 	for(let i=0;i<data.length;i++){
-// 		text+= '{ "'+ tagName+'": "'+data[i]+'"}';
-//         if(!isLast(i,data.length)){
-//             text+=",";
-//         }
-// 	}
-// 	text += '],';
-// 	return text;
-// }
 
-// //將Game object整合在同一個json區塊裏
-// function insertObject(img,point,feedback){
-// 	let text=' "Object" : [ ';
-// 	for(let i=0;i<point.length;i++){
-// 		text+= '{ "img" :"'+"123" +'", "point" : " '+point[i]+' ", "feedback" : "'+feedback[i]+'"}';
-//         if(!isLast(i,point.length)){
-//             text+=",";
-//         }
-// 	}
-// 	text += '],';
-// 	return text;
-// }
-
-// function createEndingFeedback(point,feedback){
-//     let text=' "ending" : { ';
-//     text+= ' "more-than-point" :"'+point[0] +'", "more-than-feedback" : "'+feedback[0]+'",';
-//     text+= ' "middle-feedback" : " '+feedback[1]+' ",';
-//     text+= ' "less-than-point" :"'+point[1] +'", "less-than-feedback" : "'+feedback[2]+'"}';
-
-//     return text;
-// }
 
 function isNullInput(input){
 	if(input[0]=="Error"){
@@ -195,13 +123,3 @@ function isNullInput(input){
 		return false;	
 	}
 }
-
-// // check the last number in for.
-// function isLast(now,total){
-//     if(now==total-1){
-//         return true;
-//     }
-//     else{
-//         return false;
-//     }
-// }
