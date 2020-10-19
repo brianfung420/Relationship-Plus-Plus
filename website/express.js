@@ -113,13 +113,16 @@ app.get('/customGame',function(req,res){
 app.post('/customGameUpload',img_multer.any(),function(req,res,next){
 	console.log("customGame POST!");
 	let formData = req.body;
-	console.log('form data',formData);
-	console.log('file data',req.files);
+	//console.log('form data',formData);
+	//console.log('file data',req.files);
 
 	let LineId = formData['LineId'],GameName = formData['GameName'];
 
+	console.log(LineId,GameName);
+
 	let json_text = formHandle.getJson(formData);
-	console.log("Json_text:",JSON.stringify(json_text));
+	json_text['LineId'] = LineId;
+	json_text['GameName'] = GameName;
 	json_text['avatarSkin'] = {};
 	//更改檔案路徑
 	for(var i=0;i<req.files.length;i++){
@@ -165,10 +168,7 @@ app.post('/customGameUpload',img_multer.any(),function(req,res,next){
 				// console.log(query.length);
 				mongodb.db.collection('GameList').findOneAndReplace({"LineId":{$eq:LineId},"GameName":{$eq:GameName}},json_text,{upsert:true},function(err,res){
 					if(err) reject(new Error(err));
-					console.log("1 document Replace,Data is:");
-					for (const [key, value] of Object.entries(res)) {
-						console.log(key,value);
-					}
+					console.log("1 document Replace");
 					resolve("Replace Success");
 				});
 			});
@@ -203,9 +203,11 @@ app.post('/playGame',function(req,res){
 			mongodb.connect(function(err){
 				if(err) reject(new Error(err));
 																				 //這部分是指除了這些以外的需要(未實作)
-				mongodb.db.collection('GameList').findOne({"LineId":LineId,"GameName":gameName}/*,{_id:0,'LineId':0}*/,function(err,result){
+				mongodb.db.collection('GameList').findOne({"LineId":id,"GameName":gameName}/*,{_id:0,'LineId':0}*/,function(err,result){
 					if(err) reject(new Error(err));
-					//console.log(result);
+					if(result==null){
+						reject("Not Data in databse");
+					}
 					resolve(result);
 				});
 			})
@@ -214,7 +216,7 @@ app.post('/playGame',function(req,res){
 	
 	checkFilePath().then(function (dbObject){
 		console.log('Success');
-		pathName = path.join(__dirname,"./userData/json/"+dbObject.LineId+'.json');
+		pathName = path.join(__dirname,"./userData/json/"+dbObject.LineId+dbObject.GameName+'.json');
 		let data = JSON.stringify(dbObject);
 		//開啓檔案 讀取('r') 
 		fs.open(pathName,'r',function(err,fd){
