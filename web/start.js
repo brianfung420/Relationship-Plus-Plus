@@ -1,11 +1,12 @@
 const express = require('express');
 const app = express(); 
 const path = require('path');
-var port = process.env.PORT || 3000;
+var port = process.env.PORT || 8080;
 
 app.use(express.static(path.join(__dirname, '')));
 app.get('/', function (req, res) { 
-    res.sendfile(__dirname + '/index.html'); 
+	console.log("Get file");
+    res.sendfile(__dirname + '/game/dist/index.html'); 
 });
 
 app.listen(port, function() {

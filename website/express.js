@@ -3,6 +3,7 @@ const app = express();
 const port = process.env.PORT || 8080;
 const fs = require('fs');
 const path = require('path');
+const npm = require("npm");
 const bodyParser = require('body-parser');
 
 var formHandle = require('./js/formHandle.js');
@@ -269,6 +270,26 @@ app.post('/playGame',function(req,res){
 	// res.write(tmp);
 	// res.end();
 });
+
+app.get("/playCustGame",function(req,res){
+	console.log("get playCustGame");
+	fs.readFile("./dist/index.html",function(err,data){
+		if(err){
+			throw err;
+		}
+		res.writeHead(200,{"Content":"text/html"});
+		res.write(data);
+		res.end();
+	});
+});
+
+app.get("/testStartGame",function(req,res){
+	console.log("get testStartGame");
+	npm.load(()=>npm.run("game"));
+	res.end();
+});
+
+
 
 app.listen(port,function(){
 	console.log("app listening on post 8080!");
