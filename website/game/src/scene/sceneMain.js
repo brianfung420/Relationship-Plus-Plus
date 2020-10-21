@@ -1,8 +1,8 @@
-import background from '../../assert/catchFood/images/background.png';
-import avatar from '../../assert/catchFood/images/Athletics_goal_pose-1602770291124.gif';
-import avatarUnhappy from '../../assert/catchFood/images/goalin_runner-1602770291125.gif';
-//import avatarunHappy from '../../assert/catchFood/images/food1.png';
-//import avatarunHappy from '../../assert/catchFood/images/food1.png';
+import background from '../../../userData/img/background.png';
+import avatar from '../../../userData/img/goal.gif';
+import avatarUnhappy from '../../../userData/img/goalin_runner-1603089450711.gif';
+import food1 from '../../../userData/img/food1.png';
+import food2 from '../../../userData/img/food2.png';
 
 
 class SceneMain extends Phaser.Scene{
@@ -22,11 +22,15 @@ class SceneMain extends Phaser.Scene{
         this.load.image("background", background);
         this.load.image("avatar", avatar);
         this.load.image("avatarUnhappy", avatarUnhappy);
+        this.load.image("arrestedObject1", food1);
+        this.load.image("arrestedObject2", food2);
+        /*
         for(let i = 1; i <= data.arrestedObject.length ; i++){
             let key = "arrestedObject" + i;
             let path = "../../assert/catchFood/images/" + "food"+i+".png"
             this.load.image(key, path);
-        }       
+        }      
+        */ 
     }
 
     create() {
@@ -113,13 +117,15 @@ class SceneMain extends Phaser.Scene{
 
         let data = this.cache.json.get('gameData');
         let objType = Math.floor(Math.random() * data.arrestedObject.length);
+        //console.log(data.arrestedObject);
         let x = Math.floor(Math.random() * 700);
         let key = 'arrestedObject'+ (objType+1);
       
         let gameObject = this.physics.add.sprite(x, 180, key);
-        gameObject.point = data.arrestedObject[objType].point;
+        gameObject.point = parseInt(data.arrestedObject[objType].point);
         gameObject.feedback = data.arrestedObject[objType].feedback;
         gameObject.body.velocity.y = 300;
+        
         this.arrestedObject.add(gameObject);
 
         

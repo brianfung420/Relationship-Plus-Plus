@@ -21,7 +21,19 @@
     "mongoose": "^5.10.7",
     "multer": "^1.4.2",
     "passport": "^0.4.1",
-    "pug": "^3.0.0"
+    "pug": "^3.0.0",
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "file-loader": "^4.3.0",
+    "html-webpack-plugin": "^3.2.0",
+    "raw-loader": "^3.1.0",
+    "terser-webpack-plugin": "^2.3.8",
+    "webpack": "^4.44.2",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^4.2.2"
   },
   "devDependencies": {
     "npm": "^6.14.8"

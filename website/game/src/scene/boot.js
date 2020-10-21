@@ -1,6 +1,7 @@
-import gameData from "../../assert/catchFood/json/fakedata.json";
-import Background from '../../assert/catchFood/images/background.png';
-import StartBtn from '../../assert/catchFood/images/start_btn.png';
+import gameData from "../../../userData/json/U3d5ed62dc56e57382acad4d9254111e1CatchFood.json";
+import background from '../../../userData/img/background.png';
+import startBtn from '../../../userData/img/start_btn.png';
+
 
 
 class Boot extends Phaser.Scene{
@@ -10,8 +11,8 @@ class Boot extends Phaser.Scene{
 
     preload() {
         this.load.json("gameData", gameData);
-        this.load.image("background", Background);
-        this.load.image("startBtn", StartBtn);
+        this.load.image("background", background);
+        this.load.image("startBtn", startBtn);
     }
 
     create() {

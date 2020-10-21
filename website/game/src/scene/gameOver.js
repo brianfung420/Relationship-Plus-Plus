@@ -1,4 +1,4 @@
-import background from '../../assert/catchFood/images/background.png';
+import background from '../../../userData/img/background.png';
 
 class GameOver extends Phaser.Scene{
     constructor(){
@@ -34,12 +34,12 @@ class GameOver extends Phaser.Scene{
         let feedback;
        
         
-        if (this.score < data.finalFeedback.belowThen.point){
-            feedback = data.finalFeedback.belowThen.feedback;
-          }else if(this.score > data.finalFeedback.higherThen.point){
-            feedback = data.finalFeedback.higherThen.feedback;
+        if (this.score < parseInt(data.FinalFeedback.belowThen.point)){
+            feedback = data.FinalFeedback.belowThen.feedback;
+          }else if(this.score > parseInt(data.FinalFeedback.higherThen.point)){
+            feedback = data.FinalFeedback.higherThen.feedback;
           }else{
-            feedback = data.finalFeedback.other.feedback;
+            feedback = data.FinalFeedback.other.feedback;
         }
         
         
