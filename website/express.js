@@ -273,7 +273,7 @@ app.post('/playGame',function(req,res){
 
 app.get("/playCustGame",function(req,res){
 	console.log("get playCustGame");
-	fs.readFile("./dist/index.html",function(err,data){
+	fs.readFile("./game/dist/index.html",function(err,data){
 		if(err){
 			throw err;
 		}
