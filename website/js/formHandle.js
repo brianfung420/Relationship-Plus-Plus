@@ -30,7 +30,7 @@ function getObjectArray(form){
 		tmp['pic'] = "";
 		tmp['point'] = obj_point;
 		tmp['feedback'] = obj_feedback;
-		arrestedObject = tmp;
+		arrestedObject[0] = tmp;
 	}
 	console.log(arrestedObject);
 	return arrestedObject;
