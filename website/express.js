@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const npm = require("npm");
 const bodyParser = require('body-parser');
+const random = require('string-random')
 
 var formHandle = require('./js/formHandle.js');
 
@@ -12,15 +13,15 @@ var formHandle = require('./js/formHandle.js');
 //app.use(formidable()); 
 
 const multer = require('multer');
-var storage = multer.diskStorage({
-	destination: function (req, file, cb) {
-		cb(null, './userData/img');
-	},
-	filename: function (req, file, cb) {
-		cb(null,  file.originalname.split('.')[0] + '-' + Date.now() +'.' +file.mimetype.split('/')[1] );
-	}
-});
-var img_multer = multer({storage:storage});
+// var storage = multer.diskStorage({
+// 	destination: function (req, file, cb) {
+// 		cb(null, './userData/img/');
+// 	},
+// 	filename: function (req, file, cb) {
+// 		cb(null,  file.originalname.split('.')[0] +Date.now()+"."+file.mimetype.split('/')[1] );
+// 	}
+// });
+// var img_multer = multer({storage:storage});
 
 //LIFF
 const passport = require('passport');
@@ -40,8 +41,6 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true })); 
 
 app.use(express.static(path.join(__dirname)));
-
-
 
 app.get('/send-id', function(req, res) {
     res.json({id: myLiffId});
@@ -110,16 +109,61 @@ app.get('/customGame',function(req,res){
 	});
 });
 
+// function setRandomMulter(req,res,next){
+// 	let randomID = random(16);
+// 	console.log(randomID);
+// 	fs.mkdir('./game/dist/'+randomID,function(err){
+// 		if(err){
+// 			console.log(err);
+// 		}else{
+// 			console.log('create done!');
+// 		}
+// 	});
+// 	let randomPath = path.join(__dirname+'/game/dist/'+randomID);
+// 	var storage_random = multer.diskStorage({
+// 		destination: function (req, file, cb) {
+// 			console.log("dest randomId:"+randomPath);
+// 			cb(null, './game/dist/'+randomPath+"/");
+// 		},
+// 		filename: function (req, file, cb) {
+// 			cb(null,  file.originalname.split('.')[0] +"."+file.mimetype.split('/')[1] );
+// 		}
+// 	});
+	
+// 	console.log("setRandomMulter path:"+randomID);
+// 	random_multer = new multer({storage:storage_random}); 
+// 	req.body['randomId'] = randomID;
+// 	console.log(req.body['randomId']);
+// 	next();
+// }
+var sec_random_storage = multer.diskStorage({
+	destination: function (req, file, cb) {
+		fs.mkdir('./game/dist/tmp',function(err){
+			if(err){
+				console.log(err);
+			}else{
+				console.log('create done!');
+			}
+		});
+		cb(null, './game/dist/tmp/');
+	},
+	filename: function (req, file, cb) {
+		cb(null,  file.originalname.split('.')[0] +"."+file.mimetype.split('/')[1] );
+	}
+});
+let random_multer = multer({storage:sec_random_storage});	//初始時會用上面的路徑設定
+
+//random_multer:使用覆蓋的方式 設定路徑
 //客制化完成内容
-app.post('/customGameUpload',img_multer.any(),function(req,res,next){
+app.post('/customGameUpload',random_multer.any(),function(req,res,next){		
 	console.log("customGame POST!");
 	let formData = req.body;
-	//console.log('form data',formData);
-	//console.log('file data',req.files);
 
 	let LineId = formData['LineId'],GameName = formData['GameName'];
-
 	console.log(LineId,GameName);
+
+	//console.log('form data',formData);
+	console.log('file data',req.files);
 
 	let json_text = formHandle.getJson(formData);
 	json_text['LineId'] = LineId;
@@ -127,30 +171,34 @@ app.post('/customGameUpload',img_multer.any(),function(req,res,next){
 	json_text['avatarSkin'] = {};
 	//更改檔案路徑
 	for(var i=0;i<req.files.length;i++){
+		//console.log(req.files[i].path);
 		switch(req.files[i].fieldname){
 			case 'happy':
-				json_text['avatarSkin'][req.files[i].fieldname] = req.files[i].filename;
+				//console.log("happy path:"+req.files[i].filename);
+				json_text['avatarSkin']['happy'] = req.files[i].filename;
 				break;
 			case 'unhappy':
-				json_text['avatarSkin'][req.files[i].fieldname] = req.files[i].filename;
+				//console.log("unhappy path:"+req.files[i].filename);
+				json_text['avatarSkin']['unhappy'] = req.files[i].filename;
 				break;
 			case 'other-1':
-				json_text['avatarSkin'][req.files[i].fieldname] = req.files[i].filename;
+				//console.log("other-1 path:"+req.files[i].filename);
+				json_text['avatarSkin']['other-1'] = req.files[i].filename;
 				break;
 			case 'other-2':
-				json_text['avatarSkin'][req.files[i].fieldname] = req.files[i].filename;
+				//console.log("other-2 path:"+req.files[i].filename);
+				json_text['avatarSkin']['other-2'] = req.files[i].filename;
 				break;
 			case 'object-skin':
 				let tmp = json_text['arrestedObject'];
-				if(Array.isArray(tmp)){
-					for(var i=0;i<tmp.length;i++){
-						if(json_text['arrestedObject'][pic]==''){
-							json_text['arrestedObject'][pic] = req.files[i].filename;
+				//console.log("object-skin path:"+req.files[i].filename);
+				for(var j=0;j<tmp.length;j++){
+					if(json_text['arrestedObject'][j]['pic']===''){
+							json_text['arrestedObject'][j]['pic'] = req.files[i].filename;
 							break;
-						}
+					}else{
+						continue;
 					}
-				}else{
-					json_text['arrestedObject']['pic'] = req.files[i].filename;
 				}
 				break;
 			default:
@@ -158,7 +206,28 @@ app.post('/customGameUpload',img_multer.any(),function(req,res,next){
 		}
 	}
 
+	let randomPath = random(16);
+	let game_Path = "./game/dist/";
+	json_text["Path"] = randomPath;
+
+	fs.rename(game_Path+"tmp",game_Path+randomPath,function(err){
+		if(err){
+			console.log(err);
+		}else{
+			console.log("succes rename directory");
+		}
+	});
+
 	console.log("Json_text:",JSON.stringify(json_text));
+	let userData_json = JSON.stringify(json_text);
+
+	fs.writeFile(game_Path+randomPath+"/userData.json",userData_json,function(err){
+		if(err){
+			console.log(err);
+		}else{
+			console.log("succes write json file");
+		}
+	});
 
 	//使用非同步存進Database
 	function saveToDB(LineId,GameName,callback){
@@ -188,7 +257,7 @@ app.post('/customGameUpload',img_multer.any(),function(req,res,next){
 
 });
 
-app.post('/customGameUpload',img_multer.any(),function(req,res){
+app.post('/customGameUpload',function(req,res){
 	console.log("I am Next!");
 	res.url = './index';
 	res.redirect(302,'/index');
@@ -271,25 +340,12 @@ app.post('/playGame',function(req,res){
 	// res.end();
 });
 
-app.get("/playCustGame",function(req,res){
+app.get("/playGame",function(req,res){
 	console.log("get playCustGame");
-	fs.readFile("./game/dist/index.html",function(err,data){
-		if(err){
-			throw err;
-		}
-		res.writeHead(200,{"Content":"text/html"});
-		res.write(data);
-		res.end();
-	});
-});
-
-app.get("/testStartGame",function(req,res){
-	console.log("get testStartGame");
+	console.log(__dirname);
 	npm.load(()=>npm.run("game"));
 	res.end();
 });
-
-
 
 app.listen(port,function(){
 	console.log("app listening on post 8080!");
