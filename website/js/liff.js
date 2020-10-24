@@ -64,7 +64,7 @@ function initializeApp(){
         document.getElementById("loginBtn").addEventListener('click',function(){
             if(!liff.isLoggedIn()){
                 console.log("need to login");
-                liff.login({ redirectUri: "https://d568d94e9799.ngrok.io/index.html" });    //回傳的網址
+                liff.login({ redirectUri: "https://74a924282db3.ngrok.io/index.html" });    //回傳的網址
             }else{
                 getUserProfile();
             }
