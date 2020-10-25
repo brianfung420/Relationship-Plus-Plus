@@ -80,7 +80,7 @@ function uploadImage(url,file){
     })
     .then(function(myjson){
         window.localStorage.setItem('userPath',myjson['path']);
-        window.localStorage.setItem('gamaname',myjson['game']);
+        window.localStorage.setItem('gamaName',myjson['game']);
         //alert("已上傳資料，將跳轉到主頁");
         window.location.href = myjson['url'];
     })

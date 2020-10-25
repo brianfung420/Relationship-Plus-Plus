@@ -19,6 +19,8 @@ function launchGame(gameName){
 		console.log(result.data);
 		console.log(result.headers);
 		console.log(result.config);
+		let myJson = result.data;
+		alert("你的游戲連結:"+"https://62b83c99d18c.ngrok.io"+myJson['link'])
 	})
 	.catch(function(error){
 		console.log(error);

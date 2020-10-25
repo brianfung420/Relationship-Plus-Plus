@@ -99,14 +99,14 @@ app.get('/customGame',function(req,res){
 
 var sec_random_storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-		fs.mkdir('./game/dist/tmp',function(err){
+		fs.mkdir('./game/userData/tmp',function(err){
 			if(err){
 				console.log(err);
 			}else{
 				console.log('create done!');
 			}
 		});
-		cb(null, './game/dist/tmp/');
+		cb(null, './game/userData/tmp/');
 	},
 	filename: function (req, file, cb) {
 		cb(null,  file.originalname.split('.')[0] +"."+file.mimetype.split('/')[1] );
@@ -168,7 +168,7 @@ app.post('/customGameUpload',random_multer.any(),function(req,res,next){
 	}
 
 	let randomPath = random(16);
-	let game_Path = "./game/dist/";
+	let game_Path = "./game/userData/";
 	json_text["Path"] = randomPath;
 
 	fs.rename(game_Path+"tmp",game_Path+randomPath,function(err){
@@ -366,48 +366,75 @@ app.post('/customGameUpload',random_multer.any(),function(req,res,next){
 // 	// res.end();
 // });
 
-app.get("/playGame",function(req,res){
+app.post("/playGame",function(req,res){
 	console.log("get playCustGame");
-	let LineId = req.body.LineId,gamename = req.body.gamename;
-	mongodb.db.collection('GameList').findOne({"LineId":{$eq:LineId}},function(err,result){
-		if(err){
-			console.log(err);
-		}
-		//	result有可能是空的 所以需要判斷是不是null
-		if(result==null){			//是null的話就新增資料到DB
-			res.writeHead(200,{'Content-Type':'application/json'});
-			res.write("No Data in database");
+	let LineId = req.body.LineId,GameName = req.body.gamename;
+	mongodb.connect(function (err){
+		if(err) {
+			res.writeHead(404,{'Content-Type':'application/json'});
+			res.write("Database crash");
 			res.end();
 		}
-		else{
-			console.log("update Data");
-			//查找DB的資料有沒有和上傳的的GameName相同
-			let db_path,flag=0;
-			for(const [key,value] of Object.entries(result['game'])){
-				console.log(key,value);
-				for(const [inner_key,inner_value] of Object.entries(value)){
-					console.log(inner_key,inner_value);
-					if(inner_key===GameName){
-						flag=1;
-						db_path = inner_value;
-						index = key;
+		mongodb.db.collection('GameList').findOne({"LineId":{$eq:LineId}},function(err,result){
+			if(err){
+				console.log(err);
+			}
+			//	result有可能是空的 所以需要判斷是不是null
+			if(result==null){			//是null的話就新增資料到DB
+				res.writeHead(200,{'Content-Type':'application/json'});
+				res.write("No Data in database");
+				res.end();
+			}
+			else{
+				console.log("update Data");
+				//查找DB的資料有沒有和上傳的的GameName相同
+				let db_path,flag=0;
+				for(const [key,value] of Object.entries(result['game'])){
+					console.log(key,value);
+					for(const [inner_key,inner_value] of Object.entries(value)){
+						console.log(inner_key,inner_value);
+						if(inner_key===GameName){
+							flag=1;
+							db_path = inner_value;
+							index = key;
+						}
 					}
 				}
+				console.log(db_path);
+				if(flag){
+					res.setHeader("Content-Type","application/json");
+					//res.writeHead(200,{'Content-Type':'application/json'});
+					res.json({"link":"/playGame/"+db_path});
+					res.end();
+				}else{
+					res.writeHead(200,{'Content-Type':'application/json'});
+					res.write("No this game");
+					res.end();
+				}
+				
+				//npm.load(()=>npm.run("webpackBuild"));
 			}
-			if(flag){
-				res.writeHead(200,{'Content-Type':'application/json'});
-				res.write("database data:"+gamename+":"+db_path);
-				res.end();
-			}else{
-				res.writeHead(200,{'Content-Type':'application/json'});
-				res.write("No this game");
-				res.end();
-			}
-			
-			//npm.load(()=>npm.run("webpackBuild"));
-		}
+		});
 	});
 });
+
+app.get("/playGame/:id",function(req,res){
+	var path = req.params['id'];
+	console.log();
+	fs.readFile("./game/userData/"+path+"/index.html",function(err,data){
+		if(err){
+			console.log("Not game data!");
+			res.writeHead(404,{'Content-Type':'text/html'});
+			res.write("I am so sorry,server No your game data! :(");
+			res.end();
+		}
+		if(data){
+			res.writeHead(200,{'Content-Type':'text/html'});
+			res.write(data);
+			res.end();
+		}
+	})
+})
 
 app.listen(port,function(){
 	console.log("app listening on post 8080!");
