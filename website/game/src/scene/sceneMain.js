@@ -1,8 +1,10 @@
-import background from '../../../userData/img/background.png';
-import avatar from '../../../userData/img/goal.gif';
-import avatarUnhappy from '../../../userData/img/goalin_runner-1603089450711.gif';
-import food1 from '../../../userData/img/food1.png';
-import food2 from '../../../userData/img/food2.png';
+const userPath = "U3d5ed62dc56e57382acad4d9254111e1";
+const background = require(`../../../userData/${userPath}/img/background.png`);
+const avatarUnhappy = require(`../../../userData/${userPath}/img/goalin_runner-1603089450711.gif`);
+
+const food1 = require(`../../../userData/${userPath}/img/food1.png`);
+const food2 = require(`../../../userData/${userPath}/img/food2.png`);
+const avatar = require(`../../../userData/${userPath}/img/goal.gif`);
 
 
 class SceneMain extends Phaser.Scene{
@@ -18,6 +20,7 @@ class SceneMain extends Phaser.Scene{
     }
 
     preload() {
+        //let path = "../../../userData/img/food2.png";
         let data = this.cache.json.get('gameData');
         this.load.image("background", background);
         this.load.image("avatar", avatar);
@@ -37,6 +40,7 @@ class SceneMain extends Phaser.Scene{
         let gameWidth = this.sys.game.config.width;
         let gameHeight = this.sys.game.config.height;
         let data = this.cache.json.get('gameData');
+
         
         this.score = 0;
         this.timeLeft = 10;

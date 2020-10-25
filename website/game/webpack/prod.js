@@ -2,12 +2,16 @@ const merge = require("webpack-merge");
 const path = require("path");
 const base = require("./base");
 const TerserPlugin = require("terser-webpack-plugin");
+//const userPath = sessionStorage.getItem(userPath);
+const userPath = "U3d5ed62dc56e57382acad4d9254111e1";
+const outputPath = "dist/" + userPath + "/game";
 
 module.exports = merge(base, {
   mode: "production",
   output: {
-    filename: "bundle.min.js",
-    publicPath: "/game/dist/"
+    path: path.resolve(__dirname, outputPath),
+    filename: "bundle.min.js"
+    //publicPath: "/game/dist/"
   },
   devtool: false,
   performance: {

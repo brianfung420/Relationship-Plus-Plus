@@ -1,6 +1,12 @@
-import gameData from "../../../userData/json/U3d5ed62dc56e57382acad4d9254111e1CatchFood.json";
-import background from '../../../userData/img/background.png';
-import startBtn from '../../../userData/img/start_btn.png';
+//import gameData from "../../../userData/json/U3d5ed62dc56e57382acad4d9254111e1CatchFood.json";
+//import background from '../../../userData/img/background.png';
+//import startBtn from '../../../userData/img/start_btn.png';
+
+//const userPath = sessionStorage.getItem("userPath");
+const userPath = "U3d5ed62dc56e57382acad4d9254111e1";
+const background = require(`../../../userData/${userPath}/img/background.png`);
+const startBtn = require(`../../../userData/${userPath}/img/start_btn.png`);
+const gameData = require(`../../../userData/${userPath}/json/U3d5ed62dc56e57382acad4d9254111e1CatchFood.json`);
 
 
 

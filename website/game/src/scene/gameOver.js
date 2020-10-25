@@ -1,5 +1,5 @@
-import background from '../../../userData/img/background.png';
-
+const userPath = "U3d5ed62dc56e57382acad4d9254111e1";
+const background = require(`../../../userData/${userPath}/img/background.png`);
 class GameOver extends Phaser.Scene{
     constructor(){
         super('GameOver');
@@ -10,7 +10,7 @@ class GameOver extends Phaser.Scene{
     }
 
     preload() {
-        this.load.image('background',background);
+        this.load.image("background", background);
         
     }
 
