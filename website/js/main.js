@@ -70,12 +70,19 @@ function uploadImage(url,file){
     })
     .then(function(response){
         if(response.ok){
-            return response.url;
+            return response.json();
+            //console.log("url:"+url);
+            //window.location.href = url;
         }
-        throw new Error('Network response was not ok.');
+        else{
+            throw new Error('Network response was not ok.');
+        }
     })
-    .then(function(url){
-        window.location.href = url;
+    .then(function(myjson){
+        window.localStorage.setItem('userPath',myjson['path']);
+        window.localStorage.setItem('gamaName',myjson['game']);
+        //alert("已上傳資料，將跳轉到主頁");
+        window.location.href = myjson['url'];
     })
     .catch(function(err) {
         console.log('There has been a problem with your fetch operation:', err);

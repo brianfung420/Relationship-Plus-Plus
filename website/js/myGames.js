@@ -3,7 +3,11 @@ function launchGame(gameName){
     let Uid=sessionStorage.getItem('userID');
 	axios({
 		method:'POST',
+<<<<<<< HEAD
 		baseURL:'https://999432274352.ngrok.io',
+=======
+		baseURL:'https://62b83c99d18c.ngrok.io',
+>>>>>>> div
 		url:'/playGame',
 		'Content-Type':'application/json',
 		data:{
@@ -19,6 +23,8 @@ function launchGame(gameName){
 		console.log(result.data);
 		console.log(result.headers);
 		console.log(result.config);
+		let myJson = result.data;
+		alert("你的游戲連結:"+"https://62b83c99d18c.ngrok.io"+myJson['link'])
 	})
 	.catch(function(error){
 		console.log(error);
