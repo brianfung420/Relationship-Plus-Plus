@@ -79,8 +79,9 @@ function uploadImage(url,file){
         }
     })
     .then(function(myjson){
-        window.localStorage.setItem('catchFood',myjson['path']);
-        alert("已上傳資料，將跳轉到主頁");
+        window.localStorage.setItem('userPath',myjson['path']);
+        window.localStorage.setItem('gamaname',myjson['game']);
+        //alert("已上傳資料，將跳轉到主頁");
         window.location.href = myjson['url'];
     })
     .catch(function(err) {

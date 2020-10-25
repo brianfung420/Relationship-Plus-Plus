@@ -268,7 +268,7 @@ app.post('/customGameUpload',random_multer.any(),function(req,res,next){
 		console.log(resp);
 		console.log("res start");
 		res.setHeader("Content-Type","application/json");
-		res.json({'path':randomPath,'url':'./index'});
+		res.json({'path':randomPath,'url':'./index',"game":GameName});
 		res.end();
 		npm.load(()=>npm.run("game"));
 		console.log("res end");
