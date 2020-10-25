@@ -1,6 +1,6 @@
 //const userPath = sessionStorage.getItem("userPath");
 const userPath = "jyT2CIqmRAW6zGmo";
-const background = require(`../../userData/${userPath}/background.png`);
+import background from '../static/assert/background.png';
 class GameOver extends Phaser.Scene{
     constructor(){
         super('GameOver');
