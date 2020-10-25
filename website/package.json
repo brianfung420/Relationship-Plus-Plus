@@ -6,6 +6,8 @@
   "scripts": {
     "start": "express.js",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "webpackBuild": "webpack --config game/webpack/prod.js ",
+    "webpackStart": "webpack-dev-server --config game/webpack/base.js --open",
     "game": "node ./game/hello.js"
   },
   "author": "Brian Fung",
