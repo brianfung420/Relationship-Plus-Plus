@@ -1,3 +1,4 @@
+//const userPath = sessionStorage.getItem("userPath");
 const userPath = "U3d5ed62dc56e57382acad4d9254111e1";
 const background = require(`../../../userData/${userPath}/img/background.png`);
 const avatarUnhappy = require(`../../../userData/${userPath}/img/goalin_runner-1603089450711.gif`);

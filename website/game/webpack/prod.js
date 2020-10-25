@@ -4,7 +4,7 @@ const base = require("./base");
 const TerserPlugin = require("terser-webpack-plugin");
 //const userPath = sessionStorage.getItem(userPath);
 const userPath = "U3d5ed62dc56e57382acad4d9254111e1";
-const outputPath = "dist/" + userPath + "/game";
+const outputPath = "../dist/" + userPath;
 
 module.exports = merge(base, {
   mode: "production",
