@@ -1,0 +1,7 @@
+{"_id":"5f8d49438f69a0de6a7fb072",
+	"opening":["hello","Lll"],
+	"arrestedObject":{
+		"pic":"B4BA8F01-AA38-40CF-8216-84514F14FA0C-1603094844927.png",
+		"point":"100",
+		"feedback":"Fit"}
+	,"FinalFeedback":{"higherThen":{"point":"Prefect","feedback":"1000"},"belowThen":{"point":"Bad","feedback":"200"},"other":{"feedback":"Nice"}},"LineId":"U577d45d615d5013d1ffec085a3efe3aa","GameName":"CatchFood","avatarSkin":{"happy":"67910C94-F050-450D-A5BA-B5F8E3029AF5-1603094832095.jpeg","unhappy":"F10C31D4-80E9-4841-B6E0-E707FE4E64C6-1603094839485.jpeg","other-1":"A527D466-0915-48D7-A234-33E0FF84A689-1603094841317.jpeg","other-2":"10136620-C246-4065-A8DA-9668040B1479-1603094843193.jpeg"}}

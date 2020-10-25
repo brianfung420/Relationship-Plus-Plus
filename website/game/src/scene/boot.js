@@ -3,10 +3,10 @@
 //import startBtn from '../../../userData/img/start_btn.png';
 
 //const userPath = sessionStorage.getItem("userPath");
-const userPath = "U3d5ed62dc56e57382acad4d9254111e1";
-const background = require(`../../../userData/${userPath}/img/background.png`);
-const startBtn = require(`../../../userData/${userPath}/img/start_btn.png`);
-const gameData = require(`../../../userData/${userPath}/json/U3d5ed62dc56e57382acad4d9254111e1CatchFood.json`);
+const userPath = "jyT2CIqmRAW6zGmo";
+const background = require(`../../userData/${userPath}/background.png`);
+const startBtn = require(`../../userData/${userPath}/start_btn.png`);
+const gameData = require(`../../userData/${userPath}/userData.json`);
 
 
 

@@ -1,11 +1,11 @@
 //const userPath = sessionStorage.getItem("userPath");
-const userPath = "U3d5ed62dc56e57382acad4d9254111e1";
-const background = require(`../../../userData/${userPath}/img/background.png`);
-const avatarUnhappy = require(`../../../userData/${userPath}/img/goalin_runner-1603089450711.gif`);
+const userPath = "jyT2CIqmRAW6zGmo";
+const background = require(`../../userData/${userPath}/background.png`);
+const avatarUnhappy = require(`../../userData/${userPath}/goalin_runner-1603089450711.gif`);
 
-const food1 = require(`../../../userData/${userPath}/img/food1.png`);
-const food2 = require(`../../../userData/${userPath}/img/food2.png`);
-const avatar = require(`../../../userData/${userPath}/img/goal.gif`);
+const food1 = require(`../../userData/${userPath}/food1.png`);
+const food2 = require(`../../userData/${userPath}/food2.png`);
+const avatar = require(`../../userData/${userPath}/goal.gif`);
 
 
 class SceneMain extends Phaser.Scene{
