@@ -10,8 +10,8 @@ module.exports = merge(base, {
   mode: "production",
   output: {
     path: path.resolve(__dirname, outputPath),
-    filename: "bundle.min.js"
-    //publicPath: "/game/dist/"
+    filename: "bundle.min.js",
+    publicPath: "/game/dist/" + userPath + "/"
   },
   devtool: false,
   performance: {
