@@ -3,7 +3,7 @@ function launchGame(gameName){
     let Uid=sessionStorage.getItem('userID');
 	axios({
 		method:'POST',
-		baseURL:'https://d2b36a1092ea.ngrok.io',
+		baseURL:'https://5ac918bb06af.ngrok.io',
 		url:'/playGame',
 		'Content-Type':'application/json',
 		data:{

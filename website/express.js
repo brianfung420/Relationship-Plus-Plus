@@ -195,7 +195,7 @@ app.post('/customGameUpload',random_multer.any(),function(req,res,next){
 		return new Promise(function (resolve,reject){
 			console.log(LineId,GameName,randomPath);
 			mongodb.connect(function (err){
-				if(err) reject(new Error(err)) ;
+				if(err) reject("Can't connect to Database") ;
 				// let query = mongodb.db.collection('GameList').find({'id':dbId}).toArray();
 				// console.log(query.length);
 				mongodb.db.collection('GameList').findOne({"LineId":{$eq:LineId}},function(err,result){
@@ -210,7 +210,7 @@ app.post('/customGameUpload',random_multer.any(),function(req,res,next){
 						data['game'][0] = {};
 						data['game'][0][GameName] = randomPath;
 						mongodb.db.collection('GameList').insertOne(data,function(err,res){
-							if(err) reject(new Error("Can't insert data to Database"));
+							if(err) reject("Can't insert data to Database");
 						});
 						console.log("insert Data!");
 						resolve("Insert Success");
@@ -239,7 +239,7 @@ app.post('/customGameUpload',random_multer.any(),function(req,res,next){
 							mongodb.db.collection('GameList').updateOne({"LineId":{$eq:LineId}},{$set:{[tmp]:data}},function(err,res){
 								if(err){
 									console.log(err);
-									reject(new Error("Can't update data to Database"));
+									reject(new "Can't update data to Database");
 								}
 								//console.log(res);
 								resolve("Update Success");
@@ -250,7 +250,7 @@ app.post('/customGameUpload',random_multer.any(),function(req,res,next){
 							mongodb.db.collection('GameList').updateOne({"LineId":{$eq:LineId}},{$addToSet:data},function(err,res){
 								if(err){
 									console.log(err);
-									reject(new Error("Can't update data to Database"));
+									reject("Can't update data to Database");
 								}
 								//console.log(res);
 								resolve("Update Success");
@@ -266,24 +266,28 @@ app.post('/customGameUpload',random_multer.any(),function(req,res,next){
 	
 	saveToDB(LineId,GameName,randomPath).then(function(resp){
 		console.log(resp);
-		next();
+		console.log("res start");
+		res.setHeader("Content-Type","application/json");
+		res.json({'path':randomPath,'url':'./index'});
+		res.end();
+		npm.load(()=>npm.run("game"));
+		console.log("res end");
 	})
-	.catch(function (res){
+	.catch(function (resp){
 		console.log(res);
-		res.sendStatus(500);
+		res.writeHead(500,{"Content-Type":"application/json"});
 		res.write(res);
+		res.end();
 	});
-
+	
 });
 
-app.post('/customGameUpload',function(req,res){
-	console.log("I am Next!");
-	res.writeHead(200,{"Content":"text/html"});
-	res.url = './index';
-	res.write(randomPath);
-	res.end();
-	console.log("res end");
-});
+// app.post('/customGameUpload',function(req,res){
+// 	console.log("I am Next!");
+// 	res.url = './index';
+// 	res.end();
+// 	console.log("res end");
+// });
 
 // app.post('/playGame',function(req,res){
 // 	// 網頁方面的請求
