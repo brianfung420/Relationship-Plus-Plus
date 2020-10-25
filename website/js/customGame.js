@@ -123,3 +123,12 @@ function isNullInput(input){
 		return false;	
 	}
 }
+/*
+const npm = require("npm");
+//import runNpmStart from './handleNpm';
+function runNpm(){
+    console.log("wow");
+    npm.load(()=>npm.run("webpackStart"));
+    
+}
+*/

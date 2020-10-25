@@ -84,7 +84,8 @@ function uploadImage(url,file){
         //alert("已上傳資料，將跳轉到主頁");
         
         //window.location.href = myjson['url'];
-        //npm.load(()=>npm.run("webpackBuild"));
+        //npm.load(()=>npm.run("webpackStart"));
+        //console.log("startGame");
     })
     .catch(function(err) {
         console.log('There has been a problem with your fetch operation:', err);

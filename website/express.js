@@ -1,9 +1,9 @@
-var express = require('express')
+var express = require('express');
+const npm = require("npm");
 const app = express();
 const port = process.env.PORT || 8080;
 const fs = require('fs');
 const path = require('path');
-const npm = require("npm");
 const bodyParser = require('body-parser');
 const random = require('string-random')
 var formHandle = require('./js/formHandle.js');
@@ -263,14 +263,14 @@ app.post('/customGameUpload',random_multer.any(),function(req,res,next){
 			});
 		});
 	}
-	
+
 	saveToDB(LineId,GameName,randomPath).then(function(resp){
 		console.log(resp);
 		console.log("res start");
 		res.setHeader("Content-Type","application/json");
 		res.json({'path':randomPath,'url':'./index',"game":GameName});
 		res.end();
-		npm.load(()=>npm.run("game"));
+		npm.load(()=>npm.run("webpackBuild"));
 		console.log("res end");
 	})
 	.catch(function (resp){

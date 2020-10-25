@@ -6,7 +6,7 @@
   "scripts": {
     "start": "express.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "webpackBuild": "webpack --config webpack/prod.js ",
+    "webpackBuild": "cd game && webpack --config webpack/prod.js ",
     "webpackStart": "cd game && webpack-dev-server --config webpack/base.js --open",
     "game": "node ./game/hello.js"
   },
