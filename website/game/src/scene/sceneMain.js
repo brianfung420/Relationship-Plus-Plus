@@ -1,6 +1,6 @@
 //const userPath = sessionStorage.getItem("userPath");
 const userPath = "jyT2CIqmRAW6zGmo";
-const background = require(`../../userData/${userPath}/background.png`);
+import background from '../static/assert/background.png';
 const avatarUnhappy = require(`../../userData/${userPath}/goalin_runner-1603089450711.gif`);
 
 const food1 = require(`../../userData/${userPath}/food1.png`);

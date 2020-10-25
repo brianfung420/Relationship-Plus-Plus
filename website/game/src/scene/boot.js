@@ -1,11 +1,13 @@
 //import gameData from "../../../userData/json/U3d5ed62dc56e57382acad4d9254111e1CatchFood.json";
 //import background from '../../../userData/img/background.png';
 //import startBtn from '../../../userData/img/start_btn.png';
-
+//const background = require(`../static/assert/background.png`);
 //const userPath = sessionStorage.getItem("userPath");
+
+import background from '../static/assert/background.png';
+import startBtn from '../static/assert/start_btn.png';
 const userPath = "jyT2CIqmRAW6zGmo";
-const background = require(`../../userData/${userPath}/background.png`);
-const startBtn = require(`../../userData/${userPath}/start_btn.png`);
+//const startBtn = require(`../static/assert/start_btn.png`);
 const gameData = require(`../../userData/${userPath}/userData.json`);
 
 
