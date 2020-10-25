@@ -65,10 +65,14 @@ function initializeApp(){
             if(!liff.isLoggedIn()){
                 console.log("need to login");
 <<<<<<< HEAD
+<<<<<<< HEAD
                 liff.login({ redirectUri: "https://999432274352.ngrok.io/index.html" });    //回傳的網址
 =======
                 liff.login({ redirectUri: "https://62b83c99d18c.ngrok.io/index.html" });    //回傳的網址
 >>>>>>> div
+=======
+                liff.login({ redirectUri: "https://5a42ed0e07aa.ngrok.io/index.html" });    //回傳的網址
+>>>>>>> master
             }else{
                 getUserProfile();
             }

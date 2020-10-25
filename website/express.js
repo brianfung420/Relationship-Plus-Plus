@@ -421,7 +421,7 @@ app.post("/playGame",function(req,res){
 app.get("/playGame/:id",function(req,res){
 	var path = req.params['id'];
 	console.log();
-	fs.readFile("./game/userData/"+path+"/index.html",function(err,data){
+	fs.readFile("./game/dist/"+path+"/index.html",function(err,data){
 		if(err){
 			console.log("Not game data!");
 			res.writeHead(404,{'Content-Type':'text/html'});

@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "Relation plus plus Server",
-  "main": "express.js",
+  "main": "game/src/index.js",
   "scripts": {
     "start": "express.js",
     "test": "echo \"Error: no test specified\" && exit 1",
