@@ -8,6 +8,8 @@ const bodyParser = require('body-parser');
 const random = require('string-random')
 var formHandle = require('./js/formHandle.js');
 
+//process.env['ASSET_PATH'] = "https://dc0936c4d0cf.ngrok.io";
+
 const multer = require('multer');
 
 //LIFF
@@ -47,7 +49,6 @@ app.use(passport.session());
 //主頁内容
 app.get('/',function(req,res){
 	console.log("Get /");
-	console.log("path:"+__dirname);
 	fs.readFile('./index.html',function(err,data){
 		if(err){
 			throw err;
@@ -109,7 +110,15 @@ var sec_random_storage = multer.diskStorage({
 		cb(null, './game/userData/tmp/');
 	},
 	filename: function (req, file, cb) {
-		cb(null,  file.originalname.split('.')[0] +"."+file.mimetype.split('/')[1] );
+		if(file.fieldname==="happy"){
+			cb(null,  "goal" +"."+file.mimetype.split('/')[1] );
+		}else if(file.fieldname==="unhappy"){
+			cb(null,  "unHappy" +"."+file.mimetype.split('/')[1] );
+		}else if(file.fieldname==="object-skin"){
+			cb(null,  "food1" +"."+file.mimetype.split('/')[1] );
+		}else{
+			cb(null,  file.originalname.split('.')[0] +"."+file.mimetype.split('/')[1] );
+		}
 	}
 });
 let random_multer = multer({storage:sec_random_storage});	//初始時會用上面的路徑設定
@@ -256,9 +265,7 @@ app.post('/customGameUpload',random_multer.any(),function(req,res,next){
 								resolve("Update Success");
 							});
 						}
-						
 					}
-					
 				});
 			});
 		});
@@ -266,20 +273,32 @@ app.post('/customGameUpload',random_multer.any(),function(req,res,next){
 
 	saveToDB(LineId,GameName,randomPath).then(function(resp){
 		console.log(resp);
-		console.log("res start");
 		res.setHeader("Content-Type","application/json");
 		res.json({'path':randomPath,'url':'./index',"game":GameName});
 		res.end();
-		npm.load(()=>npm.run("webpackBuild"));
-		console.log("res end");
 	})
 	.catch(function (resp){
-		console.log(res);
+		console.log(resp);
 		res.writeHead(500,{"Content-Type":"application/json"});
-		res.write(res);
+		res.write(resp);
 		res.end();
 	});
-	
+
+});
+
+app.post('/buildNpm',function (req,res){
+	let userPath = req.body;
+	//console.log(req.body);
+	let localPath = userPath["userPath"];
+	console.log("userPath:"+localPath);
+	//set precess.env
+	process.env['userPath'] = localPath;
+	console.log(process.env.userPath);
+	npm.load(()=>npm.run("webpackBuild"));
+
+	res.setHeader("Content-Type","application/json");
+	res.json({"message":"ok"});
+	res.end();
 });
 
 // app.post('/customGameUpload',function(req,res){
@@ -404,7 +423,7 @@ app.post("/playGame",function(req,res){
 				if(flag){
 					res.setHeader("Content-Type","application/json");
 					//res.writeHead(200,{'Content-Type':'application/json'});
-					res.json({"link":"/playGame/"+db_path});
+					res.json({"link":db_path});
 					res.end();
 				}else{
 					res.writeHead(200,{'Content-Type':'application/json'});

@@ -114,7 +114,31 @@ function checkFormData(){
 
 }
 
-
+function buildNpm(){
+    let tmp = localStorage.getItem("userPath");
+    let userPath = {"userPath":tmp};
+    let json_path = JSON.stringify(userPath);
+    //console.log(json_path);
+    fetch("./buildNpm", {    //不用set header就可以上傳資料(content-type) 
+        headers:{"Content-Type":"application/json"},
+        method: 'POST',
+        body:json_path
+    })
+    .then(function(response){
+        if(response.ok){
+            return response.json();
+        }
+        else{
+            throw new Error('Network response was not ok.');
+        }
+    })
+    .then(function(myjson){
+        console.log(myjson['message']);
+    })
+    .catch(function (err) {
+        console.log(err);
+    })
+}
 
 function isNullInput(input){
 	if(input[0]=="Error"){

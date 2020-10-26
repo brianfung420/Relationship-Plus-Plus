@@ -1,11 +1,17 @@
-//const userPath = sessionStorage.getItem("userPath");
-const userPath = "jyT2CIqmRAW6zGmo";
+const userPath = localStorage.getItem("userPath");
+//const userPath = "jyT2CIqmRAW6zGmo";
+//const userPath = process.env.userPath;
 import background from '../static/assert/background.png';
-const avatarUnhappy = require(`../../userData/${userPath}/goalin_runner-1603089450711.gif`);
+const avatarUnhappy = require(`../../userData/${userPath}/unHappy.gif`);
 
 const food1 = require(`../../userData/${userPath}/food1.png`);
-const food2 = require(`../../userData/${userPath}/food2.png`);
 const avatar = require(`../../userData/${userPath}/goal.gif`);
+//const food2 = require(`../../userData/${userPath}/food2.png`);
+
+// const avatarUnhappy = require('../../userData/hUMVii4Zwn8m7XdS/goalin_runner-1603089450711.gif');
+
+// const food1 = require('../../userData/hUMVii4Zwn8m7XdS/food1.png');
+// const avatar = require('../../userData/hUMVii4Zwn8m7XdS/goal.gif');
 
 
 class SceneMain extends Phaser.Scene{
@@ -22,12 +28,13 @@ class SceneMain extends Phaser.Scene{
 
     preload() {
         //let path = "../../../userData/img/food2.png";
+        console.log("scene正則表達式:"+`../../userData/${userPath}/goalin_runner-1603089450711.gif`);
         let data = this.cache.json.get('gameData');
         this.load.image("background", background);
         this.load.image("avatar", avatar);
         this.load.image("avatarUnhappy", avatarUnhappy);
         this.load.image("arrestedObject1", food1);
-        this.load.image("arrestedObject2", food2);
+        //this.load.image("arrestedObject2", food2);
         /*
         for(let i = 1; i <= data.arrestedObject.length ; i++){
             let key = "arrestedObject" + i;

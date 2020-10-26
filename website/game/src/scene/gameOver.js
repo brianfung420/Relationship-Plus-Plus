@@ -1,5 +1,5 @@
 //const userPath = sessionStorage.getItem("userPath");
-const userPath = "jyT2CIqmRAW6zGmo";
+//const userPath = "jyT2CIqmRAW6zGmo";
 import background from '../static/assert/background.png';
 class GameOver extends Phaser.Scene{
     constructor(){

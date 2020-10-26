@@ -2,16 +2,18 @@ const merge = require("webpack-merge");
 const path = require("path");
 const base = require("./base");
 const TerserPlugin = require("terser-webpack-plugin");
-//const userPath = sessionStorage.getItem(userPath);
-const userPath = "jyT2CIqmRAW6zGmo";
+const userPath = process.env.userPath;
+console.log("prod.js:"+userPath);
+//const userPath = "jyT2CIqmRAW6zGmo";
 const outputPath = "../dist/" + userPath;
+//console.log("Asset_Path:"+process.env.ASSET_PATH);
 
 module.exports = merge(base, {
   mode: "production",
   output: {
+    publicPath: "/game/dist/" + userPath + "/",    //主要改這條更換儲存路徑
     path: path.resolve(__dirname, outputPath),
-    filename: "bundle.min.js",
-    publicPath: "/game/dist/" + userPath + "/"
+    filename: "bundle.min.js"
   },
   devtool: false,
   performance: {
