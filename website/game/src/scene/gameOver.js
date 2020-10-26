@@ -11,6 +11,7 @@ class GameOver extends Phaser.Scene{
     }
 
     preload() {
+        
         this.load.image("background", background);
         
     }

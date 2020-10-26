@@ -6,7 +6,11 @@ const userPath = process.env.userPath;
 console.log("prod.js:"+userPath);
 //const userPath = "jyT2CIqmRAW6zGmo";
 const outputPath = "../dist/" + userPath;
+<<<<<<< Updated upstream
 //console.log("Asset_Path:"+process.env.ASSET_PATH);
+=======
+console.log(process.env);
+>>>>>>> Stashed changes
 
 module.exports = merge(base, {
   mode: "production",
