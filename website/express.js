@@ -20,6 +20,8 @@ const mongodb = require('./mongo.js')
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 const myLiffId = "1654663712-jX3xwOow";
 
+//test balbala
+
 app.set('view engine','pub');
 app.set('views','./views');
 
