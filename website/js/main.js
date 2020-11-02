@@ -48,64 +48,6 @@ function closeWin(winName){
   win.style.display = "none";
 }
 
-function uploadImage(url,file){
-    id = sessionStorage.getItem('userID');
-    gameName = sessionStorage.getItem('gameName');
-    file.set('LineId',id);
-    file.set('GameName',gameName);
-        //console.log(file);
-        // for (var key in text){
-        //     formData.append(key, text[key]);
-        // }
-        // for (var key in file){
-        //     const img_Blob = DataURITiBlob(file[key]);
-        //     const type = img_Blob.type;
-        //     let img_type=dataURI.split('/')[1];
-        //     formData.append(key, img_Blob,key+'.'+img_type);
-        // }
-
-    fetch(url, {    //不用set header就可以上傳資料(content-type) 
-            method: 'POST',
-            body: file
-    })
-    .then(function(response){
-        if(response.ok){
-            return response.json();
-            //console.log("url:"+url);
-            //window.location.href = url;
-        }
-        else{
-            throw new Error('Network response was not ok.');
-        }
-    })
-    .then(function(myjson){
-        window.localStorage.setItem('userPath',myjson['path']);
-        window.localStorage.setItem('gamaName',myjson['game']);
-        //alert("已上傳資料，將跳轉到主頁");
-        //window.location.href = myjson['url'];
-        //npm.load(()=>npm.run("webpackStart"));
-        //console.log("startGame");
-    })
-    .catch(function(err) {
-        console.log('There has been a problem with your fetch operation:', err);
-    });
-}
-
-function DataURIToBlob(dataURI) {
-    const splitDataURI = dataURI.split(',');
-    //console.log("splitDataURI:"+splitDataURI);
-    const byteString = splitDataURI[0].indexOf('base64') >= 0 ? atob(splitDataURI[1]) : decodeURI(splitDataURI[1]);
-    //console.log("byteString:"+byteString);
-    const mimeString = splitDataURI[0].split(':')[1].split(';')[0];
-    //console.log("mimeString:"+mimeString);
-
-    const ia = new Uint8Array(byteString.length);
-    for (let i = 0; i < byteString.length; i++)
-        ia[i] = byteString.charCodeAt(i);
-
-    return new Blob([ia], { type: mimeString });
-}
-
 function checkLogin(){
     let myLiffId = "";
     myLiffId = sessionStorage.getItem('liffID');
@@ -126,3 +68,19 @@ function checkLogin(){
         });
     }
 }
+
+function DataURIToBlob(dataURI) {
+    const splitDataURI = dataURI.split(',');
+    //console.log("splitDataURI:"+splitDataURI);
+    const byteString = splitDataURI[0].indexOf('base64') >= 0 ? atob(splitDataURI[1]) : decodeURI(splitDataURI[1]);
+    //console.log("byteString:"+byteString);
+    const mimeString = splitDataURI[0].split(':')[1].split(';')[0];
+    //console.log("mimeString:"+mimeString);
+
+    const ia = new Uint8Array(byteString.length);
+    for (let i = 0; i < byteString.length; i++)
+        ia[i] = byteString.charCodeAt(i);
+
+    return new Blob([ia], { type: mimeString });
+}
+
