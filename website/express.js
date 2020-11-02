@@ -237,9 +237,17 @@ app.post('/customGameUpload',random_multer.any(),function(req,res,next){
 									flag=1;
 									exist_path = inner_value;
 									index = key;
+									//在資料庫找到有該游戲的資料，刪掉路徑的folder
+									fs.rmdir("./game/userData/"+inner_value,{recursive:true},function(err){
+										if(err){
+											throw err;
+										}
+										console.log("Delete folder:"+inner_value);
+									});
 								}
 							}
 						}
+
 						console.log(index,exist_path);
 						if(flag){		//有的話就將DB的部分改成上傳的GameName和path
 							let data = {};
