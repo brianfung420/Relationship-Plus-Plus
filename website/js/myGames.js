@@ -1,10 +1,10 @@
 function launchGame(gameName){
-	let url = "https://ac504ea1c894.ngrok.io" ;
+	let base_url = "https://f617d50052cd.ngrok.io" ;
     //alert("Links for you : http://thisisjustatestlink");
     let Uid=sessionStorage.getItem('userID');
 	axios({
 		method:'POST',
-		baseURL:url,
+		baseURL:base_url,
 		url:'/playGame',
 		'Content-Type':'application/json',
 		data:{
@@ -22,7 +22,7 @@ function launchGame(gameName){
 		// console.log(result.config);
 		let myJson = result.data;
 		localStorage.setItem("userPath",myJson['link']);
-		alert("你的游戲連結:"+url+"/playGame/"+myJson['link'])
+		alert("你的游戲連結:"+base_url+"/playGame/"+myJson['link']);
 	})
 	.catch(function(error){
 		console.log(error);

@@ -8,8 +8,6 @@ const bodyParser = require('body-parser');
 const random = require('string-random')
 var formHandle = require('./js/formHandle.js');
 
-//process.env['ASSET_PATH'] = "https://dc0936c4d0cf.ngrok.io";
-
 const multer = require('multer');
 
 //LIFF
@@ -19,6 +17,8 @@ const session = require('express-session');
 const mongodb = require('./mongo.js')
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
 const myLiffId = "1654663712-jX3xwOow";
+
+//test balbala
 
 app.set('view engine','pub');
 app.set('views','./views');
@@ -237,9 +237,17 @@ app.post('/customGameUpload',random_multer.any(),function(req,res,next){
 									flag=1;
 									exist_path = inner_value;
 									index = key;
+									//在資料庫找到有該游戲的資料，刪掉路徑的folder
+									fs.rmdir("./game/userData/"+inner_value,{recursive:true},function(err){
+										if(err){
+											throw err;
+										}
+										console.log("Delete folder:"+inner_value);
+									});
 								}
 							}
 						}
+
 						console.log(index,exist_path);
 						if(flag){		//有的話就將DB的部分改成上傳的GameName和path
 							let data = {};
@@ -299,6 +307,55 @@ app.post('/buildNpm',function (req,res){
 	res.setHeader("Content-Type","application/json");
 	res.json({"message":"ok"});
 	res.end();
+});
+
+//客制化界面查詢資料庫是否有該用戶的資料
+app.post('/getPreviousData',function(req,res){
+	let json = req.body;
+	console.log('Post getPreviousData');
+	console.log(json);
+	let LineId = json['LineId'],gamaname = json['gameName'];
+
+	//使用非同步存進Database
+	function checkData(LineId,GameName,callback){
+		return new Promise(function (resolve,reject){
+			mongodb.connect(function (err){
+				if(err) reject("Can't connect to Database") ;
+				mongodb.db.collection('GameList').findOne({"LineId":{$eq:LineId}},function(err,result){
+					if(err){
+						console.log(err);
+					}
+					//	result有可能是空的 所以需要判斷是不是null
+					if(result==null){			//是null的話就新增資料到DB
+						console.log("No Data");
+						reject({});
+					}else{
+						console.log("DB have Data~");
+						let tmp = result['game'][0];
+						if(typeof tmp[GameName]!='string'){
+							console.log("is undefined");
+							reject({});
+						}else{
+							console.log("is find");
+							let path = tmp[GameName];
+							let temp = fs.readFileSync("./game/userData/"+path+"/userData.json");
+							let DB_data = JSON.parse(temp);
+							resolve(DB_data);
+						}
+					}
+				});
+			});
+		});
+	}
+	res.setHeader('Content-Type',"application/json");
+	checkData(LineId,gamaname).then(function(response){
+		res.json(response);
+		res.end();
+	})
+	.catch(function(response){
+		res.json(response);
+		res.end();
+	});
 });
 
 // app.post('/customGameUpload',function(req,res){

@@ -6,6 +6,7 @@ window.onload = function(){
     checkLogin();
     setButton();
     sessionStorage.setItem('gameName','CatchFood');
+    getPreviousData();
 }
 
 function handlePreviewGame(){
@@ -81,6 +82,40 @@ function postDesign(formData){
     uploadImage('/customGameUpload',formData);
 }
 
+//上傳定制資料
+function uploadImage(url,file){
+    id = sessionStorage.getItem('userID');
+    gameName = sessionStorage.getItem('gameName');
+    file.set('LineId',id);
+    file.set('GameName',gameName);
+
+    fetch(url, {    //不用set header就可以上傳資料(content-type) 
+            method: 'POST',
+            body: file
+    })
+    .then(function(response){
+        if(response.ok){
+            return response.json();
+            //console.log("url:"+url);
+            //window.location.href = url;
+        }
+        else{
+            throw new Error('Network response was not ok.');
+        }
+    })
+    .then(function(myjson){
+        window.localStorage.setItem('userPath',myjson['path']);
+        window.localStorage.setItem('gamaName',myjson['game']);
+        //alert("已上傳資料，將跳轉到主頁");
+        //window.location.href = myjson['url'];
+        //npm.load(()=>npm.run("webpackStart"));
+        //console.log("startGame");
+    })
+    .catch(function(err) {
+        console.log('There has been a problem with your fetch operation:', err);
+    });
+}
+
 function checkFormData(){
     let flag=0;
     var from = document.getElementsByName('DesignForm')[0];
@@ -112,6 +147,35 @@ function checkFormData(){
         postDesign(formData);
     }
 
+}
+
+function getPreviousData(){
+    let id = sessionStorage.getItem('userID');
+    let gameName = sessionStorage.getItem('gameName');
+    let data = {"LineId":id,"gameName":gameName}
+    fetch("/getPreviousData", {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers:{
+                "content-type":'application/json'
+            }
+    })
+    .then(function(response){
+        if(response.ok){
+            return response.json();
+        }
+        else{
+            throw new Error('Network response was not ok.');
+        }
+    })
+    .then(function(myjson){
+        console.log("GetPreviousData");
+        //可以用myjson獲取userData裏面的值
+        
+    })
+    .catch(function(err) {
+        console.log('There has been a problem with your fetch operation:', err);
+    });
 }
 
 function buildNpm(){
