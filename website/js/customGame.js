@@ -182,6 +182,7 @@ function buildNpm(){
     let tmp = localStorage.getItem("userPath");
     let userPath = {"userPath":tmp};
     let json_path = JSON.stringify(userPath);
+    showLoadingWindow();
     //console.log(json_path);
     fetch("./buildNpm", {    //不用set header就可以上傳資料(content-type) 
         headers:{"Content-Type":"application/json"},
@@ -198,6 +199,7 @@ function buildNpm(){
     })
     .then(function(myjson){
         console.log(myjson['message']);
+        closeLoadingWindow()
     })
     .catch(function (err) {
         console.log(err);

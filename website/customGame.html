@@ -9,26 +9,46 @@
     <link rel="stylesheet" href="lib/css/bootstrap-grid.min.css">
     <link rel="stylesheet" href="lib/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="css/prefeb/dialogueDesign.css">
-    <link rel="stylesheet" href="css/prefeb/avatarDesign.css">
-    <link rel="stylesheet" href="css/prefeb/gameObjectDesign.css">
-    <link rel="stylesheet" href="css/prefeb/endFeedbackDesign.css">
+    <link rel="stylesheet" href="component/dialogueDesign/dialogueDesign.css">
+    <link rel="stylesheet" href="component/avatarDesign/avatarDesign.css">
+    <link rel="stylesheet" href="component/gameObjectDesign/gameObjectDesign.css">
+    <link rel="stylesheet" href="component/endFeedbackDesign/endFeedbackDesign.css">
+    <link rel="stylesheet" href="component/loadingAlert/loadingAlert.css">
 
     <!----------------------JS------------------------->
     <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
     <script src="./js/main.js"></script>
     <script src="./js/liff.js"></script>
     <script src="./js/customGame.js"></script>
-    <script src="./js/dialougeDesign.js"></script>
-    <script src="./js/avatarDesign.js"></script>
-    <script src="./js/gameObjectDesign.js"></script>
-    <script src="./js/endFeedbackDesign.js"></script>
+    <script src="component/dialogueDesign/dialougeDesign.js"></script>
+    <script src="component/avatarDesign/avatarDesign.js"></script>
+    <script src="component/gameObjectDesign/gameObjectDesign.js"></script>
+    <script src="component/endFeedbackDesign/endFeedbackDesign.js"></script>
+    <script src="component/loadingAlert/loadingAlert.js"></script>
 
 
     
 
 </head>
 <body>
+<div id="loadingAlert">
+    <div id="loading-overlay"></div>
+    <div id="loadingContent">
+        <div class="loadEffect">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="loading-text">遊戲生成中。。。</div>
+    </div>
+</div>
+
+
 <form name="DesignForm" onsubmit="return false">
     <!--navBar-->
     <div class="container-fluid">
@@ -189,8 +209,8 @@
     <div class="conatiner">
         <div class="preview-game-btn">
             <!--<input type="submit" class="big-btn" onclick="handlePreviewGame()" value="體驗游戲"></input>-->
-            <input type="submit" class="big-btn" onclick="checkFormData()" value="上傳游戲"></input> 
-            <button class="big-btn" onclick="buildNpm()" type="button">Build</button>
+            <input type="submit" class="big-btn" onclick="checkFormData()" value="上傳資料"></input> 
+            <button class="big-btn" onclick="buildNpm()" type="button">生成遊戲</button>
             <!--onclick="handlePreviewGame()"-->
         </div>
     </div>

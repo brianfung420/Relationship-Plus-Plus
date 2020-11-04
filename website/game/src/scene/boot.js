@@ -3,14 +3,14 @@
 //import startBtn from '../../../userData/img/start_btn.png';
 //const background = require(`../static/assert/background.png`);
 //const userPath = sessionStorage.getItem("userPath");
+//const userPath = "jyT2CIqmRAW6zGmo";
+//const startBtn = require(`../static/assert/start_btn.png`);
+//const userPath = process.env.userPath;
 
 import background from '../static/assert/background.png';
 import startBtn from '../static/assert/start_btn.png';
-//const userPath = "jyT2CIqmRAW6zGmo";
-//const startBtn = require(`../static/assert/start_btn.png`);
-const userPath = window.localStorage.getItem("userPath");
-//const userPath = process.env.userPath;
 
+const userPath = window.localStorage.getItem("userPath");
 const gameData = require(`../../userData/${userPath}/userData.json`);
 //const gameData = require('../../userData/hUMVii4Zwn8m7XdS/userData.json');
 
