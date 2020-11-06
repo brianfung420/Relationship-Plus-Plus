@@ -85,6 +85,19 @@ app.get('/gameShop',function(req,res){
 	});
 });
 
+// app.get("/myGames",function(req,res){
+// 	var path = req.params['id'];
+// 	console.log("Get /gameShop");
+// 	fs.readFile("./gameShop.html",function(err,data){
+// 		if(err){
+// 			throw err;
+// 		}
+// 		res.writeHead(200,{"Content":"text/html"});
+// 		res.write(data);
+// 		res.end();
+// 	});
+// })
+
 //客制化游戲界面
 app.get('/customGame',function(req,res){
 	console.log("customGame Get!");
@@ -195,7 +208,15 @@ app.post('/customGameUpload',random_multer.any(),function(req,res,next){
 		if(err){
 			console.log(err);
 		}else{
-			console.log("succes write json file");
+			console.log("succes write userData json file");
+		}
+	});
+
+	fs.writeFile(game_Path+randomPath+"/backup.json",userData_json,function(err){
+		if(err){
+			console.log(err);
+		}else{
+			console.log("succes write backup json file");
 		}
 	});
 
@@ -302,7 +323,13 @@ app.post('/buildNpm',function (req,res){
 	//set precess.env
 	process.env['userPath'] = localPath;
 	console.log(process.env.userPath);
+
 	npm.load(()=>npm.run("webpackBuild"));
+	// function waitWebpack(){
+	// 	return new Promise(function(resolve,reject){
+	// 		npm.load(()=>npm.run("webpackBuild"));
+	// 	});
+	// }
 
 	res.setHeader("Content-Type","application/json");
 	res.json({"message":"ok"});
@@ -338,9 +365,10 @@ app.post('/getPreviousData',function(req,res){
 						}else{
 							console.log("is find");
 							let path = tmp[GameName];
-							let temp = fs.readFileSync("./game/userData/"+path+"/userData.json");
+							let temp = fs.readFileSync("./game/userData/"+path+"/backup.json");
 							let DB_data = JSON.parse(temp);
 							resolve(DB_data);
+							resolve({"message":"is find"});
 						}
 					}
 				});
@@ -357,90 +385,6 @@ app.post('/getPreviousData',function(req,res){
 		res.end();
 	});
 });
-
-// app.post('/customGameUpload',function(req,res){
-// 	console.log("I am Next!");
-// 	res.url = './index';
-// 	res.end();
-// 	console.log("res end");
-// });
-
-// app.post('/playGame',function(req,res){
-// 	// 網頁方面的請求
-// 	console.log("POST from playGame");
-// 	let data = req.body;
-// 	let id = data.LineId,gameName=data.gamename;
-// 	function checkFilePath(){
-// 		return new Promise(function(resolve,reject){
-// 			mongodb.connect(function(err){
-// 				if(err) reject(new Error(err));
-// 																				 //這部分是指除了這些以外的需要(未實作)
-// 				mongodb.db.collection('GameList').findOne({"LineId":id,"GameName":gameName}/*,{_id:0,'LineId':0}*/,function(err,result){
-// 					if(err) reject(new Error(err));
-// 					if(result==null){
-// 						reject("Not Data in databse");
-// 					}
-// 					resolve(result);
-// 				});
-// 			})
-// 		})
-// 	}
-	
-// 	checkFilePath().then(function (dbObject){
-// 		console.log('Success');
-// 		pathName = path.join(__dirname,"./userData/json/"+dbObject.LineId+dbObject.GameName+'.json');
-// 		let data = JSON.stringify(dbObject);
-// 		//開啓檔案 讀取('r') 
-// 		fs.open(pathName,'r',function(err,fd){
-// 			if(err){
-// 				console.log(err);
-// 				fs.writeFile(pathName,data,function(err){
-// 					if(err){
-// 						console.log(err);
-// 						return new Error("can not write data to JSON");
-// 					}
-// 					else{
-// 						console.log("Success create User JSON file!");
-// 						return 'Create new json file';
-// 					}
-// 				});
-// 			}
-
-// 			// var buffr = new Buffer(1024);
-// 			// let output;
-
-// 			// fs.read(fd,function(err,bytes,buffer){
-// 			// 	if(err) return new Error('Can not read json');
-// 			// 	if(bytes>0){
-// 			// 		console.log(bytes+" 字元被讀取");
-// 			// 		output = buffr.slice(0, bytes).toString()
-//    //          		console.log(output);
-// 			// 	}
-// 			// });
-// 			console.log("File exist(Function Inner)");	//這個會在最後才run到，在不適合的時候出現了(太晚了)		
-// 			return "File exist";
-// 		});
-// 	})
-// 	.then(function (result){
-// 		console.log("file is find!");
-// 		console.log(result);	//不知道爲什麽是undefined
-// 		res.writeHead(200,{'Content-Type':'application/json'});
-// 		res.write('Success!');
-// 		res.end();
-// 	})
-// 	.catch(function(error){
-// 		console.log(error);
-// 		res.writeHead(404,{'Content-Type':'application/json'});
-// 		res.write('Can not find user json file!');
-// 		res.end();
-// 	})
-
-	
-// 	// console.log(data);
-// 	// res.writeHead(200,{'Content-Type':'application/json'});
-// 	// res.write(tmp);
-// 	// res.end();
-// });
 
 app.post("/playGame",function(req,res){
 	console.log("get playCustGame");

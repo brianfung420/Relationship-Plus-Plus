@@ -17,6 +17,7 @@ function closeLoadingWindow(){
 function showLoadingWindow(){
     document.getElementById('loadingAlert').style.display = 'block';  
     lockScreen();
+
 }
 /*
 window.onload = function(){

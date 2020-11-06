@@ -199,7 +199,12 @@ function buildNpm(){
     })
     .then(function(myjson){
         console.log(myjson['message']);
-        closeLoadingWindow()
+        console.log('LoadingWindow!');
+        setTimeout(() => {
+            closeLoadingWindow();
+            console.log('CloseWindow!');
+            window.location.href = "./myGame.html";
+        }, 20000);
     })
     .catch(function (err) {
         console.log(err);
