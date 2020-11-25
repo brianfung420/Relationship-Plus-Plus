@@ -2,12 +2,20 @@
 <html>
   <head>
     <meta charset="utf-8">
+   
+    <script>
+      window.onload=function(){
+        window.localStorage.setItem('userPath',document.getElementById('path').innerText);
+      }
+    </script>
+
   </head>
   <body>
+    <div id='path' style="display: none;"><%= htmlWebpackPlugin.options.userPath %></div>
   </body>
 </html>
 <style>
-  /*
+  
   html,
   body {
     width: 100%;
@@ -16,5 +24,8 @@
     padding: 0;
     background-color: #000000;
   }
-  */
+  canvas{
+    max-height: 100%;
+  }
+  
 </style>

@@ -12,7 +12,7 @@ const DEFAULT_WIDTH = 800;
 const config = {
     type: Phaser.AUTO,
     parent: "phaser-example",
-    mode: Phaser.Scale.FIT,
+    //mode: Phaser.Scale.FIT,
     autoCenter: Phaser.Scale.CENTER_BOTH,
     width: DEFAULT_WIDTH,
     height: DEFAULT_HEIGHT,
