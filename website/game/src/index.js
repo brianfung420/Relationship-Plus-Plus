@@ -18,10 +18,7 @@ const config = {
     height: DEFAULT_HEIGHT,
     scene: [Boot, SceneMain, GameOver],
     physics:{
-      default:'arcade',
-      arcade:{
-        debug: true
-      }
+      default:'arcade'
     }
   };
   

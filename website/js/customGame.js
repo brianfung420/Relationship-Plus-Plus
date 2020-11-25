@@ -118,8 +118,8 @@ function uploadImage(url,file){
 
 function checkFormData(){
     let flag=0;
-    var from = document.getElementsByName('DesignForm')[0];
-    var formData = new FormData(from);
+    var form = document.getElementsByName('DesignForm')[0];
+    var formData = new FormData(form);
 
     for(var [key,value] of formData){
         if(value===''){
@@ -144,9 +144,23 @@ function checkFormData(){
 
     if(!flag){
         console.log("Go to POST");
-        postDesign(formData);
+        let postFrom = new FormData();
+        postFrom.append("path",makeRandomPath(16));
+        for(var data of formData.entries()){
+            postFrom.append(data[0],data[1]);
+        }
+        postDesign(postFrom);
     }
+}
 
+function makeRandomPath(max){
+    var path = "";
+    var characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    var charactersLength = characters.length;
+    for(var i=0;i<max;i++){
+        path += characters.charAt(Math.floor(Math.random()*charactersLength));
+    }
+    return path;
 }
 
 function getPreviousData(){
@@ -203,7 +217,7 @@ function buildNpm(){
         setTimeout(() => {
             closeLoadingWindow();
             console.log('CloseWindow!');
-            window.location.href = "./myGame.html";
+            //window.location.href = "./myGame.html";
         }, 20000);
     })
     .catch(function (err) {

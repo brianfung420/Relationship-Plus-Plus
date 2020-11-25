@@ -5,7 +5,7 @@ const port = process.env.PORT || 8080;
 const fs = require('fs');
 const path = require('path');
 const bodyParser = require('body-parser');
-const random = require('string-random')
+const random = require('string-random');
 var formHandle = require('./js/formHandle.js');
 
 const multer = require('multer');
@@ -113,14 +113,15 @@ app.get('/customGame',function(req,res){
 
 var sec_random_storage = multer.diskStorage({
 	destination: function (req, file, cb) {
-		fs.mkdir('./game/userData/tmp',function(err){
+		let path = req.body['path'];
+		fs.mkdir('./game/userData/'+path,function(err){
 			if(err){
 				console.log(err);
 			}else{
 				console.log('create done!');
 			}
 		});
-		cb(null, './game/userData/tmp/');
+		cb(null, './game/userData/'+path);
 	},
 	filename: function (req, file, cb) {
 		if(file.fieldname==="happy"){
@@ -134,6 +135,7 @@ var sec_random_storage = multer.diskStorage({
 		}
 	}
 });
+
 let random_multer = multer({storage:sec_random_storage});	//初始時會用上面的路徑設定
 
 //random_multer:使用覆蓋的方式 設定路徑
@@ -141,169 +143,14 @@ let random_multer = multer({storage:sec_random_storage});	//初始時會用上�
 app.post('/customGameUpload',random_multer.any(),function(req,res,next){		
 	console.log("customGame POST!");
 	let formData = req.body;
+	let LineId = formData['LineId'],GameName = formData['GameName'],path = formData['path'];
+	
+	saveData(formData,req.files);
 
-	let LineId = formData['LineId'],GameName = formData['GameName'];
-	//console.log(LineId,GameName);
-
-	//console.log('form data',formData);
-	//console.log('file data',req.files);
-
-	let json_text = formHandle.getJson(formData);
-	json_text['LineId'] = LineId;
-	json_text['GameName'] = GameName;
-	json_text['avatarSkin'] = {};
-	//更改檔案路徑
-	for(var i=0;i<req.files.length;i++){
-		//console.log(req.files[i].path);
-		switch(req.files[i].fieldname){
-			case 'happy':
-				//console.log("happy path:"+req.files[i].filename);
-				json_text['avatarSkin']['happy'] = req.files[i].filename;
-				break;
-			case 'unhappy':
-				//console.log("unhappy path:"+req.files[i].filename);
-				json_text['avatarSkin']['unhappy'] = req.files[i].filename;
-				break;
-			case 'other-1':
-				//console.log("other-1 path:"+req.files[i].filename);
-				json_text['avatarSkin']['other-1'] = req.files[i].filename;
-				break;
-			case 'other-2':
-				//console.log("other-2 path:"+req.files[i].filename);
-				json_text['avatarSkin']['other-2'] = req.files[i].filename;
-				break;
-			case 'object-skin':
-				let tmp = json_text['arrestedObject'];
-				//console.log("object-skin path:"+req.files[i].filename);
-				for(var j=0;j<tmp.length;j++){
-					if(json_text['arrestedObject'][j]['pic']===''){
-							json_text['arrestedObject'][j]['pic'] = req.files[i].filename;
-							break;
-					}else{
-						continue;
-					}
-				}
-				break;
-			default:
-				console.log("can't handle:"+req.files[i].fieldname);
-		}
-	}
-
-	let randomPath = random(16);
-	let game_Path = "./game/userData/";
-	json_text["Path"] = randomPath;
-
-	fs.rename(game_Path+"tmp",game_Path+randomPath,function(err){
-		if(err){
-			console.log(err);
-		}else{
-			console.log("succes rename directory");
-		}
-	});
-
-	console.log("Json_text:",JSON.stringify(json_text));
-	let userData_json = JSON.stringify(json_text);
-
-	fs.writeFile(game_Path+randomPath+"/userData.json",userData_json,function(err){
-		if(err){
-			console.log(err);
-		}else{
-			console.log("succes write userData json file");
-		}
-	});
-
-	fs.writeFile(game_Path+randomPath+"/backup.json",userData_json,function(err){
-		if(err){
-			console.log(err);
-		}else{
-			console.log("succes write backup json file");
-		}
-	});
-
-	//使用非同步存進Database
-	function saveToDB(LineId,GameName,randomPath,callback){
-		return new Promise(function (resolve,reject){
-			console.log(LineId,GameName,randomPath);
-			mongodb.connect(function (err){
-				if(err) reject("Can't connect to Database") ;
-				// let query = mongodb.db.collection('GameList').find({'id':dbId}).toArray();
-				// console.log(query.length);
-				mongodb.db.collection('GameList').findOne({"LineId":{$eq:LineId}},function(err,result){
-					if(err){
-						console.log(err);
-					}
-					//	result有可能是空的 所以需要判斷是不是null
-					if(result==null){			//是null的話就新增資料到DB
-						let data = {};
-						data['LineId'] = LineId;
-						data['game'] = [];
-						data['game'][0] = {};
-						data['game'][0][GameName] = randomPath;
-						mongodb.db.collection('GameList').insertOne(data,function(err,res){
-							if(err) reject("Can't insert data to Database");
-						});
-						console.log("insert Data!");
-						resolve("Insert Success");
-					}
-					else{
-						console.log("update Data");
-						let flag = 0,exist_path=0,index;
-
-						//查找DB的資料有沒有和上傳的的GameName相同
-						for(const [key,value] of Object.entries(result['game'])){
-							console.log(key,value);
-							for(const [inner_key,inner_value] of Object.entries(value)){
-								console.log(inner_key,inner_value);
-								if(inner_key===GameName){
-									flag=1;
-									exist_path = inner_value;
-									index = key;
-									//在資料庫找到有該游戲的資料，刪掉路徑的folder
-									fs.rmdir("./game/userData/"+inner_value,{recursive:true},function(err){
-										if(err){
-											throw err;
-										}
-										console.log("Delete folder:"+inner_value);
-									});
-								}
-							}
-						}
-
-						console.log(index,exist_path);
-						if(flag){		//有的話就將DB的部分改成上傳的GameName和path
-							let data = {};
-							data[GameName] = randomPath;
-							let tmp = "game."+index;		//重點部分
-							mongodb.db.collection('GameList').updateOne({"LineId":{$eq:LineId}},{$set:{[tmp]:data}},function(err,res){
-								if(err){
-									console.log(err);
-									reject(new "Can't update data to Database");
-								}
-								//console.log(res);
-								resolve("Update Success");
-							});
-						}else{			//還沒實測，可能需要花時間去研究
-							let data = {};
-							data[GameName] = randomPath;
-							mongodb.db.collection('GameList').updateOne({"LineId":{$eq:LineId}},{$addToSet:data},function(err,res){
-								if(err){
-									console.log(err);
-									reject("Can't update data to Database");
-								}
-								//console.log(res);
-								resolve("Update Success");
-							});
-						}
-					}
-				});
-			});
-		});
-	}
-
-	saveToDB(LineId,GameName,randomPath).then(function(resp){
+	saveToDB(LineId,GameName,path).then(function(resp){
 		console.log(resp);
 		res.setHeader("Content-Type","application/json");
-		res.json({'path':randomPath,'url':'./index',"game":GameName});
+		res.json({'path':path,'url':'./index',"game":GameName});
 		res.end();
 	})
 	.catch(function (resp){
@@ -312,8 +159,151 @@ app.post('/customGameUpload',random_multer.any(),function(req,res,next){
 		res.write(resp);
 		res.end();
 	});
-
 });
+
+function saveData(formData,files){
+	let LineId = formData['LineId'],GameName = formData['GameName'],path = formData['path'];
+	//console.log(LineId,GameName);
+	//console.log('form data',formData);
+	//console.log('file data',req.files);
+
+	let json_text = formHandle.getJson(formData);
+	json_text['LineId'] = LineId;
+	json_text['GameName'] = GameName;
+	json_text['path'] = path;
+	json_text['avatarSkin'] = {};
+	//更改檔案路徑
+	for(var i=0;i<files.length;i++){
+		//console.log(req.files[i].path);
+		switch(files[i].fieldname){
+			case 'happy':
+				//console.log("happy path:"+req.files[i].filename);
+				json_text['avatarSkin']['happy'] = files[i].filename;
+				break;
+			case 'unhappy':
+				//console.log("unhappy path:"+req.files[i].filename);
+				json_text['avatarSkin']['unhappy'] = files[i].filename;
+				break;
+			case 'other-1':
+				//console.log("other-1 path:"+req.files[i].filename);
+				json_text['avatarSkin']['other-1'] = files[i].filename;
+				break;
+			case 'other-2':
+				//console.log("other-2 path:"+req.files[i].filename);
+				json_text['avatarSkin']['other-2'] = files[i].filename;
+				break;
+			case 'object-skin':
+				let tmp = json_text['arrestedObject'];
+				//console.log("object-skin path:"+req.files[i].filename);
+				for(var j=0;j<tmp.length;j++){
+					if(json_text['arrestedObject'][j]['pic']===''){
+							json_text['arrestedObject'][j]['pic'] = files[i].filename;
+							break;
+					}else{
+						continue;
+					}
+				}
+				break;
+			default:
+				console.log("can't handle:"+files[i].fieldname);
+		}
+	}
+
+	// let randomPath = random(16);
+	let game_Path = "./game/userData/";
+	// json_text["path"] = randomPath;
+	
+	console.log("Json_text:",JSON.stringify(json_text));
+	let userData_json = JSON.stringify(json_text);
+
+	fs.writeFile(game_Path+path+"/userData.json",userData_json,function(err){
+		if(err){
+			console.log(err);
+		}else{
+			console.log("succes write userData json file");
+		}
+	});
+}
+
+//使用非同步存進Database
+function saveToDB(LineId,GameName,randomPath,callback){
+	return new Promise(function (resolve,reject){
+		console.log(LineId,GameName,randomPath);
+		mongodb.connect(function (err){
+			if(err) reject("Can't connect to Database") ;
+			// let query = mongodb.db.collection('GameList').find({'id':dbId}).toArray();
+			// console.log(query.length);
+			mongodb.db.collection('GameList').findOne({"LineId":{$eq:LineId}},function(err,result){
+				if(err){
+					console.log(err);
+				}
+				//	result有可能是空的 所以需要判斷是不是null
+				if(result==null){			//是null的話就新增資料到DB
+					let data = {};
+					data['LineId'] = LineId;
+					data['game'] = [];
+					data['game'][0] = {};
+					data['game'][0][GameName] = randomPath;
+					mongodb.db.collection('GameList').insertOne(data,function(err,res){
+						if(err) reject("Can't insert data to Database");
+					});
+					console.log("insert Data!");
+					resolve("Insert Success");
+				}
+				else{
+					console.log("update Data");
+					let flag = 0,exist_path=0,index;
+
+					//查找DB的資料有沒有和上傳的的GameName相同
+					for(const [key,value] of Object.entries(result['game'])){
+						console.log(key,value);
+						for(const [inner_key,inner_value] of Object.entries(value)){
+							console.log(inner_key,inner_value);
+							if(inner_key===GameName){
+								flag=1;
+								exist_path = inner_value;
+								index = key;
+								//在資料庫找到有該游戲的資料，刪掉路徑的folder
+								fs.rmdir("./game/userData/"+inner_value,{recursive:true},function(err){
+									if(err){
+										throw err;
+									}
+									console.log("Delete folder:"+inner_value);
+								});
+							}
+						}
+					}
+
+					console.log(index,exist_path);
+					if(flag){		//有的話就將DB的部分改成上傳的GameName和path
+						let data = {};
+						data[GameName] = randomPath;
+						let tmp = "game."+index;		//重點部分
+						mongodb.db.collection('GameList').updateOne({"LineId":{$eq:LineId}},{$set:{[tmp]:data}},function(err,res){
+							if(err){
+								console.log(err);
+								reject(new "Can't update data to Database");
+							}
+							//console.log(res);
+							resolve("Update Success");
+						});
+					}else{			//還沒實測，可能需要花時間去研究
+						let data = {};
+						data[GameName] = randomPath;
+						mongodb.db.collection('GameList').updateOne({"LineId":{$eq:LineId}},{$addToSet:data},function(err,res){
+							if(err){
+								console.log(err);
+								reject("Can't update data to Database");
+							}
+							//console.log(res);
+							resolve("Update Success");
+						});
+					}
+				}
+			});
+		});
+	});
+}
 
 app.post('/buildNpm',function (req,res){
 	let userPath = req.body;
@@ -359,13 +349,14 @@ app.post('/getPreviousData',function(req,res){
 					}else{
 						console.log("DB have Data~");
 						let tmp = result['game'][0];
+						//只針對一種Game
 						if(typeof tmp[GameName]!='string'){
 							console.log("is undefined");
 							reject({});
 						}else{
 							console.log("is find");
 							let path = tmp[GameName];
-							let temp = fs.readFileSync("./game/userData/"+path+"/backup.json");
+							let temp = fs.readFileSync("./game/userData/"+path+"/userData.json");
 							let DB_data = JSON.parse(temp);
 							resolve(DB_data);
 							resolve({"message":"is find"});

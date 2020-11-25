@@ -5,7 +5,7 @@ import background from '../static/assert/background.png';
 const avatarUnhappy = require(`../../userData/${userPath}/unHappy.gif`);
 
 const food1 = require(`../../userData/${userPath}/food1.png`);
-const avatar = require(`../../userData/${userPath}/goal.gif`);
+const avatar = require(`../../userData/${userPath}/goal.png`);
 //const food2 = require(`../../userData/${userPath}/food2.png`);
 
 // const avatarUnhappy = require('../../userData/hUMVii4Zwn8m7XdS/goalin_runner-1603089450711.gif');
