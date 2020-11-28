@@ -39,6 +39,7 @@
     "webpack-merge": "^4.2.2"
   },
   "devDependencies": {
-    "npm": "^6.14.8"
+    "npm": "^6.14.8",
+    "script-ext-html-webpack-plugin": "^2.1.5"
   }
 }

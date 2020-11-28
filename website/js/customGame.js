@@ -104,8 +104,8 @@ function uploadImage(url,file){
         }
     })
     .then(function(myjson){
-        window.localStorage.setItem('userPath',myjson['path']);
-        window.localStorage.setItem('gamaName',myjson['game']);
+        window.sessionStorage.setItem('userPath',myjson['path']);
+        window.sessionStorage.setItem('gamaName',myjson['game']);
         //alert("已上傳資料，將跳轉到主頁");
         //window.location.href = myjson['url'];
         //npm.load(()=>npm.run("webpackStart"));
@@ -193,7 +193,7 @@ function getPreviousData(){
 }
 
 function buildNpm(){
-    let tmp = localStorage.getItem("userPath");
+    let tmp = sessionStorage.getItem("userPath");
     let userPath = {"userPath":tmp};
     let json_path = JSON.stringify(userPath);
     showLoadingWindow();

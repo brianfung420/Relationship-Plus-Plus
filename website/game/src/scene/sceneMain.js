@@ -1,21 +1,21 @@
-const userPath = localStorage.getItem("userPath");
-//const userPath = "jyT2CIqmRAW6zGmo";
-//const userPath = process.env.userPath;
+const userPath = sessionStorage.getItem("userPath");
+const avatarHappy = sessionStorage.getItem("happy");
+const UnHappy = sessionStorage.getItem("unHappy");
+const foodObject = sessionStorage.getItem("food1");
 import background from '../static/assert/background.png';
-const avatarUnhappy = require(`../../userData/${userPath}/unHappy.gif`);
+import leftBtn from '../static/assert/left.png';
+import rightBtn from '../static/assert/right.png';
+import btnA from '../static/assert/btnA.png';
 
-const food1 = require(`../../userData/${userPath}/food1.png`);
-const avatar = require(`../../userData/${userPath}/goal.png`);
-//const food2 = require(`../../userData/${userPath}/food2.png`);
+const avatarUnhappy = require(`../../userData/${userPath}/${UnHappy}`);
 
-// const avatarUnhappy = require('../../userData/hUMVii4Zwn8m7XdS/goalin_runner-1603089450711.gif');
+// const food1 = require(`../../userData/${userPath}/food1.png`);
+// const avatar = require(`../../userData/${userPath}/goal.png`);
 
-// const food1 = require('../../userData/hUMVii4Zwn8m7XdS/food1.png');
-// const avatar = require('../../userData/hUMVii4Zwn8m7XdS/goal.gif');
-
+const food1 = require(`../../userData/${userPath}/${foodObject}`);
+const avatar = require(`../../userData/${userPath}/${avatarHappy}`);
 
 class SceneMain extends Phaser.Scene{
-    
 
     constructor() {
         super('SceneMain');
@@ -28,12 +28,16 @@ class SceneMain extends Phaser.Scene{
 
     preload() {
         //let path = "../../../userData/img/food2.png";
-        console.log("scene正則表達式:"+`../../userData/${userPath}/goalin_runner-1603089450711.gif`);
+        //console.log("scene正則表達式:"+`../../userData/${userPath}/goalin_runner-1603089450711.gif`);
+        console
         let data = this.cache.json.get('gameData');
         this.load.image("background", background);
         this.load.image("avatar", avatar);
         this.load.image("avatarUnhappy", avatarUnhappy);
         this.load.image("arrestedObject1", food1);
+        this.load.image("leftBtn", leftBtn);
+        this.load.image("rightBtn", rightBtn);
+        this.load.image("btnA", btnA);
         //this.load.image("arrestedObject2", food2);
         /*
         for(let i = 1; i <= data.arrestedObject.length ; i++){
@@ -63,8 +67,20 @@ class SceneMain extends Phaser.Scene{
         this.player.body.gravity.y = 600;
         this.player.body.collideWorldBounds = true;
         //this.player.scale.setTo(1,0.8);
-        
-        this.cursors = this.input.keyboard.createCursorKeys(); 
+        /*
+        if(true){
+            this.leftBtn = this.add.image(100, 500, "leftBtn").setInteractive();
+            this.rightBtn = this.add.image(300, 500, "rightBtn").setInteractive();
+            this.btn1 = this.add.image(700, 500, "btnA").setInteractive();
+
+
+            this.leftBtn.alpha = 0.5;
+            this.rightBtn.alpha = 0.5;
+            this.btn1.alpha = 0.5;
+        }
+      */
+
+        //this.cursors = this.input.keyboard.createCursorKeys(); 
 
         var dropTimer = this.time.addEvent({
             delay: 1000,                // ms
@@ -99,9 +115,8 @@ class SceneMain extends Phaser.Scene{
 
     update() {
         this.physics.overlap(this.player,  this.arrestedObject, this.eatObject, null, this);
-
         
-        this.player.body.velocity.x = 0;
+        /*
         if (this.cursors.left.isDown) {
         this.player.body.velocity.x = -300;
         //this.player.animations.play('left');
@@ -113,6 +128,14 @@ class SceneMain extends Phaser.Scene{
         if (this.cursors.up.isDown &&(this.player.body.onFloor())) {
         this.player.body.velocity.y = -400;
         } 
+        */
+        if(true){
+            var pointer = this.input.activePointer;
+            this.input.on('pointerdown', this.onTouch.bind(this), pointer);
+            if(this.player.body.onFloor()){
+                this.stop();
+            }
+        }
     }
 
     decreaseTime() {
@@ -162,6 +185,34 @@ class SceneMain extends Phaser.Scene{
             feedbackBar.destroy();
           }, [this.feedbackBar], this);
       }
+    onTouch(pointer){
+        var touchX = pointer.x;
+        var touchY = pointer.y;
+        let { x, y } = this.player;
+        if(touchX < x){
+            this.goLeft()
+        }
+        if(touchX > x){
+            this.goRight();
+        }
+        if(touchY < y){
+            this.jump();
+        }
+        
+    }
+    goLeft(){
+        this.player.body.velocity.x = -300;
+    }
+    goRight(){
+        this.player.body.velocity.x = 300;
+    }
+    jump(){
+        if(this.player.body.onFloor())
+        this.player.body.velocity.y = -400;
+    }
+    stop(){
+        this.player.body.velocity.x = 0;
+    }
       
 }
 

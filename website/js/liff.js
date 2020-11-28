@@ -1,4 +1,4 @@
-let userLineId;
+let userLineId,device;
 
 function setLIFF(){
     const useNodeJS = true;   // if you are not using a node server, set this value to false
@@ -64,9 +64,10 @@ function initializeApp(){
         document.getElementById("loginBtn").addEventListener('click',function(){
             if(!liff.isLoggedIn()){
                 console.log("need to login");
-                liff.login({ redirectUri: "https://4cf8374b7fde.ngrok.io/index.html" });    //回傳的網址
+                liff.login({ redirectUri: "https://e707f98f32ea.ngrok.io/index.html" });    //回傳的網址
             }else{
                 getUserProfile();
+                getUserOS();
             }
         });
     }
@@ -90,9 +91,20 @@ function getUserProfile(){
     });
 }
 
+function getUserOS(){
+    console.log("getOS");
+    device = liff.getOS();
+    getLiffDevice();
+}
+
 function getLiffUserId(gameName){
-    //setLIFF();
     console.log("getLiffUserId:"+userLineId);
     sessionStorage.setItem('userID',userLineId);
     return userLineId+gameName;
+}
+
+function getLiffDevice(){
+    console.log("getLiffOS:"+device);
+    sessionStorage.setItem('device',device);
+    return device;
 }

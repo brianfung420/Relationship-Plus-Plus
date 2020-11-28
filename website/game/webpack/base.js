@@ -1,5 +1,6 @@
 const webpack = require("webpack");
 const path = require("path");
+const ScriptExtHtmlWebpackPlugin = require('script-ext-html-webpack-plugin');
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const userPath = process.env.userPath;
@@ -35,7 +36,10 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       template: "./index.html",
-      userPath:userPath,
-    })
+      userPath: userPath,
+    }),
+    new ScriptExtHtmlWebpackPlugin({
+      defaultAttribute: 'defer'
+    }),
   ]
 };

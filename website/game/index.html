@@ -2,16 +2,18 @@
 <html>
   <head>
     <meta charset="utf-8">
-   
-    <script>
-      window.onload=function(){
-        window.localStorage.setItem('userPath',document.getElementById('path').innerText);
-      }
-    </script>
-
+    <script src="../js/playGameLoad.js"></script>
   </head>
   <body>
     <div id='path' style="display: none;"><%= htmlWebpackPlugin.options.userPath %></div>
+    <script>
+      if(sessionStorage.getItem('userPath') == null || sessionStorage.getItem('userPath') == undefined){
+          console.log('inlaa');
+          sessionStorage.setItem('userPath',document.getElementById('path').innerText);
+          //window.location.reload();
+      }
+      loadData();
+    </script>
   </body>
 </html>
 <style>
@@ -26,6 +28,7 @@
   }
   canvas{
     max-height: 100%;
+
   }
   
 </style>

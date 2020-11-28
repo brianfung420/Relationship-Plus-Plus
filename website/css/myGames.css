@@ -13,6 +13,7 @@
 .fake-item .fake-img{
     margin-bottom: 10px;
     cursor: pointer;
+    max-width: 300px;
 }
 .fake-item .fake-text{
     text-align: center;

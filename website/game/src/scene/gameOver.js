@@ -1,6 +1,6 @@
 //const userPath = sessionStorage.getItem("userPath");
 //const userPath = "jyT2CIqmRAW6zGmo";
-import background from '../static/assert/background.png';
+import blankBackground from '../static/assert/blankBackground.png';
 class GameOver extends Phaser.Scene{
     constructor(){
         super('GameOver');
@@ -12,12 +12,12 @@ class GameOver extends Phaser.Scene{
 
     preload() {
         
-        this.load.image("background", background);
+        this.load.image("blankBackground", blankBackground);
         
     }
 
     create() {
-        this.add.image(0, 0, 'background').setOrigin(0, 0);
+        this.add.image(0, 0, 'blankBackground').setOrigin(0, 0);
 
         let gameWidth = this.sys.game.config.width;
         let gameHeight = this.sys.game.config.height;

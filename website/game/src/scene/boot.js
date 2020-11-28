@@ -1,18 +1,10 @@
-//import gameData from "../../../userData/json/U3d5ed62dc56e57382acad4d9254111e1CatchFood.json";
-//import background from '../../../userData/img/background.png';
-//import startBtn from '../../../userData/img/start_btn.png';
-//const background = require(`../static/assert/background.png`);
-//const userPath = sessionStorage.getItem("userPath");
-//const userPath = "jyT2CIqmRAW6zGmo";
-//const startBtn = require(`../static/assert/start_btn.png`);
-//const userPath = process.env.userPath;
 
-import background from '../static/assert/background.png';
+import blankBackground from '../static/assert/blankBackground.png';
 import startBtn from '../static/assert/start_btn.png';
 
-const userPath = window.localStorage.getItem("userPath");
+const userPath = sessionStorage.getItem("userPath");
 const gameData = require(`../../userData/${userPath}/userData.json`);
-//const gameData = require('../../userData/hUMVii4Zwn8m7XdS/userData.json');
+
 
 class Boot extends Phaser.Scene{
     constructor() {
@@ -21,7 +13,7 @@ class Boot extends Phaser.Scene{
 
     preload() {
         this.load.json("gameData", gameData);
-        this.load.image("background", background);
+        this.load.image("blankBackground", blankBackground);
         this.load.image("startBtn", startBtn);
     }
 
@@ -31,7 +23,7 @@ class Boot extends Phaser.Scene{
         let gameHeight = this.sys.game.config.height;
         
 
-        let bg = this.add.image(0, 0, "background").setOrigin(0,0);
+        let bg = this.add.image(0, 0, "blankBackground").setOrigin(0,0);
         let style = {
             font: "48px Monospace",
             fill: "#000000",

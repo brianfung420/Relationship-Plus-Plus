@@ -1,5 +1,5 @@
 function launchGame(gameName){
-	let base_url = "https://4cf8374b7fde.ngrok.io" ;
+	let base_url = "https://e707f98f32ea.ngrok.io" ;
     //alert("Links for you : http://thisisjustatestlink");
     let Uid=sessionStorage.getItem('userID');
 	axios({
@@ -21,7 +21,7 @@ function launchGame(gameName){
 		// console.log(result.headers);
 		// console.log(result.config);
 		let myJson = result.data;
-		localStorage.setItem("userPath",myJson['link']);
+		sessionStorage.setItem("userPath",myJson['link']);
 		let gameUrl = base_url+"/playGame/"+myJson['link'];
 		
 		copyUrl2(gameUrl);
@@ -41,7 +41,7 @@ function copyUrl2(url)
 	document.execCommand('copy');
 	clip_area.remove();
 
-	alert("已複製好，可貼粘。");
+	alert("已經複製好咯，快發送給你的好朋友玩啦！");
 }
 addLoadEvent(setLIFF);
 addLoadEvent(checkLogin);

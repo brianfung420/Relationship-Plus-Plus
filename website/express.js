@@ -431,7 +431,6 @@ app.post("/playGame",function(req,res){
 
 app.get("/playGame/:id",function(req,res){
 	var path = req.params['id'];
-	console.log();
 	fs.readFile("./game/dist/"+path+"/index.html",function(err,data){
 		if(err){
 			console.log("Not game data!");
@@ -440,13 +439,36 @@ app.get("/playGame/:id",function(req,res){
 			res.end();
 		}
 		if(data){
+			console.log(data);
 			res.writeHead(200,{'Content-Type':'text/html'});
-			
 			res.write(data);
 			res.end();
 		}
 	})
-})
+});
+
+app.post("/playGame/:id",function(req,res){
+	var path = req.params['id'];
+	console.log(path);
+	fs.readFile("./game/userData/"+path+"/userData.json",function(err,data){
+		if(err){
+			console.log("Not game data!");
+			res.writeHead(404,{'Content-Type':'application/json'});
+			res.write("I am so sorry,server No your image data! :(");
+			res.end();
+		}
+		if(data){
+			let output = {}
+			let json = JSON.parse(data);
+			output['avatarSkin'] = json['avatarSkin'];
+			output['arrestedObject'] = json['arrestedObject'];
+			console.log(output);
+			res.setHeader('Content-Type','application/json');
+			res.json(output);
+			res.end();
+		}
+	})
+});
 
 app.listen(port,function(){
 	console.log("app listening on post 8080!");
