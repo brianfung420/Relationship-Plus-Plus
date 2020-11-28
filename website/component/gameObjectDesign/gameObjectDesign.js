@@ -1,5 +1,6 @@
 function addGameObject(){
-    //alert("addGameObject!");
+    alert("addGameObject!");
+    /*
     var gameObjectList = document.getElementById("game-object-list");
 
     var gameObjectListItem = document.createElement("div");
@@ -19,7 +20,7 @@ function addGameObject(){
     uploadInput.type = "file";
     uploadInput.classList.add("sub-input");
     uploadInput.classList.add("food-input");
-    uploadInput.name = "object-skin";
+    uploadInput.name = "object-skin-1";
     //uploadInput.setAttribute("onchange", handleUploadPic('object-skin-preview-2','object-skin-2',this.files));
     uploadInput.multiple = "false";
     uploadInput.accept = "image/*";
@@ -69,7 +70,7 @@ function addGameObject(){
     gameObjectListItem.appendChild(rightPart);
 
     gameObjectList.appendChild(gameObjectListItem);
-
+    */
 
     
 

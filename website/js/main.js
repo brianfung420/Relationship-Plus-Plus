@@ -1,7 +1,10 @@
 function handleUploadPic(previewBox,tagName,input_file){
     let previewDiv = document.getElementById(previewBox);
-    while (previewDiv.firstChild) {
-        previewDiv.removeChild(previewDiv.lastChild);
+    console.log(previewDiv.firstChild);
+    if(previewDiv.firstChild!=null){
+        while (previewDiv.firstChild) {
+            previewDiv.removeChild(previewDiv.lastChild);
+        }
     }
 
     for (let i = 0; i < input_file.length; i++) {

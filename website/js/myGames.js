@@ -1,5 +1,5 @@
 function launchGame(gameName){
-	let base_url = "https://e707f98f32ea.ngrok.io" ;
+	let base_url = "https://caddeb26caa3.ngrok.io" ;
     //alert("Links for you : http://thisisjustatestlink");
     let Uid=sessionStorage.getItem('userID');
 	axios({

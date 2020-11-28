@@ -166,7 +166,7 @@ function makeRandomPath(max){
 function getPreviousData(){
     let id = sessionStorage.getItem('userID');
     let gameName = sessionStorage.getItem('gameName');
-    let data = {"LineId":id,"gameName":gameName}
+    let data = {"LineId":id,"gameName":gameName};
     fetch("/getPreviousData", {
             method: 'POST',
             body: JSON.stringify(data),
@@ -217,7 +217,7 @@ function buildNpm(){
         setTimeout(() => {
             closeLoadingWindow();
             console.log('CloseWindow!');
-            //window.location.href = "./myGame.html";
+            window.location.href = "./myGames.html";
         }, 20000);
     })
     .catch(function (err) {

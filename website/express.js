@@ -85,18 +85,18 @@ app.get('/gameShop',function(req,res){
 	});
 });
 
-// app.get("/myGames",function(req,res){
-// 	var path = req.params['id'];
-// 	console.log("Get /gameShop");
-// 	fs.readFile("./gameShop.html",function(err,data){
-// 		if(err){
-// 			throw err;
-// 		}
-// 		res.writeHead(200,{"Content":"text/html"});
-// 		res.write(data);
-// 		res.end();
-// 	});
-// })
+app.get("/myGames",function(req,res){
+	//var path = req.params['id'];
+	console.log("Get /gameShop");
+	fs.readFile("./gameShop.html",function(err,data){
+		if(err){
+			throw err;
+		}
+		res.writeHead(200,{"Content":"text/html"});
+		res.write(data);
+		res.end();
+	});
+})
 
 //客制化游戲界面
 app.get('/customGame',function(req,res){

@@ -1,7 +1,7 @@
 module.exports.getJson = function (form){
 	let output = {};
-	console.log(form,typeof form);
-	output['opening'] = getOpeningArray(form);
+	//console.log(form,typeof form);
+	//output['opening'] = getOpeningArray(form);
 	output['arrestedObject'] = getObjectArray(form);
 	output['FinalFeedback'] = getFinalFeedback(form);
 	return output;
